@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/payment.dart';
 
 class Addresspage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _AddresspageState extends State<Addresspage> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: SingleChildScrollView(
           child: SafeArea(
             child: Column(
@@ -64,7 +65,7 @@ class _AddresspageState extends State<Addresspage> {
                 Padding(
                   padding: const EdgeInsets.all(11.0),
                   child: Container(
-                    height: 40,
+                    height: 45,
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 245, 243, 243),
                         borderRadius: BorderRadius.circular(10)),
@@ -235,7 +236,7 @@ class _AddresspageState extends State<Addresspage> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
-                        height: 40,
+                        height: 45,
                         width: 70,
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 245, 243, 243),
@@ -268,7 +269,7 @@ class _AddresspageState extends State<Addresspage> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
-                        height: 40,
+                        height: 45,
                         width: 230,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 245, 243, 243),
@@ -289,27 +290,34 @@ class _AddresspageState extends State<Addresspage> {
                 ),
                 const SizedBox(height: 20),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  child: SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Paymentpage(),
-                            ));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.redAccent),
-                      child: const Text(
-                        'Continue To Payment',
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    child: Container(
+                      height: 45,
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.redAccent),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.redAccent),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Paymentpage(),
+                              ));
+                        },
+                        child: Text(
+                          'CONTINUE TO PAYMENT',
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16)),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                    )),
               ],
             ),
           ),

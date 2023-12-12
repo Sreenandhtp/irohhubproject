@@ -36,13 +36,7 @@ class _PasswordchangeState extends State<Passwordchange> {
           Column(
             children: [
               const SizedBox(height: 30),
-              TextfieldName(fieldtext: 'Old Password'),
-              const SizedBox(
-                height: 5,
-              ),
-              const Passwordfield(),
-              const SizedBox(height: 25),
-              TextfieldName(fieldtext: 'New Password'),
+              TextfieldName(fieldtext: 'Reset Password'),
               const SizedBox(
                 height: 5,
               ),
@@ -56,8 +50,8 @@ class _PasswordchangeState extends State<Passwordchange> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.redAccent),
                   child: const Text(
-                    'SAVE CHANGES',
-                    style: TextStyle(),
+                    'SEND A LINK TO E-MAIL',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),

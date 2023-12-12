@@ -1,10 +1,13 @@
+ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
+import 'package:irohubproject/Homedesignpages/home.dart';
+import 'package:irohubproject/controller/authcontroller.dart';
 import 'package:irohubproject/forgottpassword.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:irohubproject/homepage.dart';
 import 'package:irohubproject/signinpage.dart';
 import 'package:irohubproject/verification.dart';
-import 'package:irohubproject/widgets/passwordfield.dart';
 import 'package:irohubproject/widgets/textfield.dart';
 
 class loginpage extends StatefulWidget {
@@ -15,6 +18,18 @@ class loginpage extends StatefulWidget {
 }
 
 class _loginpageState extends State<loginpage> {
+  final FirebaseAuthService auth = FirebaseAuthService();
+
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +61,7 @@ class _loginpageState extends State<loginpage> {
             SizedBox(
               width: 330,
               child: TextField(
+                controller: emailcontroller,
                 style: const TextStyle(fontSize: 14),
                 decoration: InputDecoration(
                     filled: true,
@@ -62,7 +78,26 @@ class _loginpageState extends State<loginpage> {
             const SizedBox(
               height: 5,
             ),
-            const Passwordfield(),
+            SizedBox(
+              width: 330,
+              child: TextField(
+                controller: passwordcontroller,
+                inputFormatters: [LengthLimitingTextInputFormatter(10)],
+                obscureText: true,
+                obscuringCharacter: '•',
+                style: const TextStyle(fontSize: 16),
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 243, 241, 241),
+                    prefixIcon: const Icon(Icons.fingerprint),
+                    // suffix: IconButton(
+                    //     onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
+                    border: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 5, color: Colors.black),
+                        borderRadius: BorderRadius.circular(15))),
+              ),
+            ),
             Align(
               alignment: Alignment.topRight,
               child: Padding(
@@ -86,17 +121,13 @@ class _loginpageState extends State<loginpage> {
               width: 330,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Verification(),
-                      ));
+                  Login();
                 },
                 style:
                     ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
                 child: const Text(
                   'LOG IN',
-                  style: TextStyle(),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -151,5 +182,23 @@ class _loginpageState extends State<loginpage> {
         ),
       ]),
     );
+  }
+
+  void Login() async {
+    String email = emailcontroller.text;
+    String password = passwordcontroller.text;
+
+    User? user = await auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print('User is Successfully Created');
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Homepage(),
+          ));
+    } else {
+      print('Some error happend');
+    }
   }
 }

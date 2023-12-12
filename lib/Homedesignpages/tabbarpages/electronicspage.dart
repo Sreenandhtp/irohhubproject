@@ -29,7 +29,7 @@ class _ElectronicspageState extends State<Electronicspage> {
       'Face Massager',
       'FaceMask',
       'PimpleRemover',
-      'NoseHairRemover',
+      'Nose Trimmer',
       'Trimmer(Wired)',
       'Trimmer',
       'Shaving Set',

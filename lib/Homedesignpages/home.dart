@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/addresspage.dart';
 import 'package:irohubproject/Homedesignpages/filter.dart';
-import 'package:irohubproject/Homedesignpages/myprofile.dart';
 import 'package:irohubproject/Homedesignpages/profile.dart';
 import 'package:irohubproject/Homedesignpages/tabbarpages/allitems.dart';
 import 'package:irohubproject/Homedesignpages/tabbarpages/bagspage.dart';
 import 'package:irohubproject/Homedesignpages/tabbarpages/electronicspage.dart';
 import 'package:irohubproject/Homedesignpages/tabbarpages/shoespage.dart';
 import 'package:irohubproject/Homedesignpages/tabbarpages/skincare.dart';
+import 'package:irohubproject/Homedesignpages/trackingorder.dart';
+import 'package:irohubproject/map/currentlocation.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -37,7 +37,7 @@ class _HomepageState extends State<Home> {
                         builder: (context) => const Profilepage(),
                       ));
                 },
-                child: CircleAvatar(
+                child: const CircleAvatar(
                   radius: 30,
                   backgroundImage: AssetImage('asset/IMG_9486.jpg'),
                 ),
@@ -52,8 +52,14 @@ class _HomepageState extends State<Home> {
             ),
             actions: [
               IconButton(
-                  onPressed: () {},
-                  icon: Icon(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MapSample(),
+                        ));
+                  },
+                  icon: const Icon(
                     Icons.add_shopping_cart,
                     color: Colors.black,
                     size: 25,
@@ -70,6 +76,7 @@ class _HomepageState extends State<Home> {
                         height: 45,
                         child: TextFormField(
                           decoration: InputDecoration(
+                              fillColor: Colors.white,
                               filled: true,
                               hintText: 'Search',
                               prefixIcon: const Icon(Icons.search),
@@ -96,10 +103,12 @@ class _HomepageState extends State<Home> {
           ),
         ),
         body: const DefaultTabController(
+          animationDuration: Durations.medium3,
           length: 5,
           child: Column(
             children: [
               TabBar(
+                  tabAlignment: TabAlignment.start,
                   isScrollable: true,
                   unselectedLabelStyle:
                       TextStyle(fontWeight: FontWeight.normal, fontSize: 15),

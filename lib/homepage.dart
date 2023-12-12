@@ -18,7 +18,7 @@ class _HomepageState extends State<Homepage> {
   List<Widget> tabwidgets = [
     const Home(),
     const Wishespage(),
-    const Cartpage(),
+    const CartPage(),
     const Profilepage()
   ];
   int indexnum = 0;

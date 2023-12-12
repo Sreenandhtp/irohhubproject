@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:irohubproject/Homedesignpages/seeall1.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
 class Allitems extends StatefulWidget {
@@ -24,6 +25,7 @@ class _AllitemsState extends State<Allitems> {
     'kids Shoes',
     'MamaEarth'
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,7 +195,13 @@ class _AllitemsState extends State<Allitems> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const seeall1(),
+                          ));
+                    },
                     child: const Text(
                       'See All',
                       style: TextStyle(color: Colors.redAccent, fontSize: 15),
@@ -328,7 +336,13 @@ class _AllitemsState extends State<Allitems> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const seeall1(),
+                          ));
+                    },
                     child: const Text(
                       'See All',
                       style: TextStyle(color: Colors.redAccent, fontSize: 15),

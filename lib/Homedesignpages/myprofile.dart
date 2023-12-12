@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:irohubproject/widgets/myprofile.dart';
 
 class Myprofile extends StatefulWidget {
@@ -9,6 +12,8 @@ class Myprofile extends StatefulWidget {
 }
 
 class _MyprofileState extends State<Myprofile> {
+  final picker = ImagePicker();
+  File? galleryFile;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +38,26 @@ class _MyprofileState extends State<Myprofile> {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          const Align(
+          Align(
             alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
+              padding:const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {
+                  _showPicker(context: context);
+                  galleryFile == null
+                      ?const Image(image: AssetImage('asset/IMG_9486.jpg'))
+                      : Image.file(
+                          galleryFile!,
+                          fit: BoxFit.fill,
+                        );
+                },
+                child: const CircleAvatar(
                   radius: 70,
-                  backgroundImage: AssetImage('asset/IMG_9486.jpg')),
+                ),
+              ),
             ),
           ),
-          TextButton(onPressed: () {}, child: const Text('Edit Photo')),
           const Text(
             'My Name',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -69,7 +84,7 @@ class _MyprofileState extends State<Myprofile> {
                         backgroundColor: Colors.redAccent),
                     child: const Text(
                       'SAVE',
-                      style: TextStyle(),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -91,6 +106,49 @@ class _MyprofileState extends State<Myprofile> {
           )
         ]),
       ),
+    );
+  }
+
+  void _showPicker({
+    required BuildContext context,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Photo Library'),
+                onTap: () async {
+                  getImage(ImageSource.gallery);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future getImage(
+    ImageSource img,
+  ) async {
+    final pickedFile = await picker.pickImage(source: img);
+    // Navigator.push(
+    //   context,MaterialPageRoute(builder: (context) => images(),)
+    // );
+    XFile? xfilePick = pickedFile;
+    setState(
+      () {
+        if (xfilePick != null) {
+          galleryFile = File(pickedFile!.path);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(// is this context <<<
+              const SnackBar(content: Text('Nothing is selected')));
+        }
+      },
     );
   }
 }

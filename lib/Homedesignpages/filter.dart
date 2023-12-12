@@ -74,7 +74,7 @@ class _FilterpageState extends State<Filterpage> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: double.maxFinite,
-                  height: 40,
+                  height: 45,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 245, 243, 243),
                       borderRadius: BorderRadius.circular(10)),
@@ -105,7 +105,7 @@ class _FilterpageState extends State<Filterpage> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: double.maxFinite,
-                  height: 40,
+                  height: 45,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 245, 243, 243),
                       borderRadius: BorderRadius.circular(10)),
@@ -136,7 +136,7 @@ class _FilterpageState extends State<Filterpage> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: double.maxFinite,
-                  height: 40,
+                  height: 45,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 245, 243, 243),
                       borderRadius: BorderRadius.circular(10)),
@@ -167,7 +167,7 @@ class _FilterpageState extends State<Filterpage> {
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: double.maxFinite,
-                  height: 40,
+                  height: 45,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 245, 243, 243),
                       borderRadius: BorderRadius.circular(10)),
@@ -207,7 +207,7 @@ class _FilterpageState extends State<Filterpage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
-                height: 40,
+                height: 45,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 245, 243, 243),
                     borderRadius: BorderRadius.circular(10)),
@@ -242,7 +242,7 @@ class _FilterpageState extends State<Filterpage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
-                height: 40,
+                height: 45,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 245, 243, 243),
                     borderRadius: BorderRadius.circular(10)),
@@ -277,7 +277,7 @@ class _FilterpageState extends State<Filterpage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
-                height: 40,
+                height: 45,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 245, 243, 243),
                     borderRadius: BorderRadius.circular(10)),
@@ -312,7 +312,7 @@ class _FilterpageState extends State<Filterpage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
-                height: 40,
+                height: 45,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 245, 243, 243),
                     borderRadius: BorderRadius.circular(10)),
@@ -349,7 +349,7 @@ class _FilterpageState extends State<Filterpage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
-                height: 40,
+                height: 45,
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 245, 243, 243),
                     borderRadius: BorderRadius.circular(10)),
@@ -393,7 +393,7 @@ class _FilterpageState extends State<Filterpage> {
                     ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
                 child: const Text(
                   'APPLY',
-                  style: TextStyle(),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),

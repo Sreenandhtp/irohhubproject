@@ -1,5 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:irohubproject/Homedesignpages/myprofile.dart';
+import 'package:irohubproject/controller/authcontroller.dart';
+import 'package:irohubproject/loginpage.dart';
 import 'package:irohubproject/widgets/profilefield.dart';
 
 class Profilepage extends StatefulWidget {
@@ -72,7 +78,19 @@ class _ProfilepageState extends State<Profilepage> {
             Profilefields(
                 buttonAction: () {},
                 profilefieldtext: 'Settings',
-                iconData: Icons.settings)
+                iconData: Icons.settings),
+            Profilefields(
+              profilefieldtext: 'Logout',
+              iconData: Icons.logout,
+              buttonAction: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const loginpage(),
+                    ));
+              },
+            )
           ],
         ),
       ),

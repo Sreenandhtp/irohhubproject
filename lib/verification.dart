@@ -70,7 +70,7 @@ class _VerificationState extends State<Verification> {
                   ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
               child: const Text(
                 'SUBMIT',
-                style: TextStyle(),
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),

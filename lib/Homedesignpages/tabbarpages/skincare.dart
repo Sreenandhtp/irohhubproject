@@ -18,7 +18,10 @@ class _SkincarepageState extends State<Skincarepage> {
       'asset/bodycare1.jpg',
       'asset/facecare3.jpg',
       'asset/facewash.jpg',
-      'asset/facewash1.jpg'
+      'asset/facewash1.jpg',
+      'asset/mamaearth.jpg',
+      'asset/haircare.jpg',
+      'asset/bodycare1.jpg'
     ];
     return Scaffold(
       backgroundColor: Colors.white,
