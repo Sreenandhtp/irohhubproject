@@ -1,5 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/seeall1.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
@@ -11,23 +15,53 @@ class Allitems extends StatefulWidget {
 }
 
 class _AllitemsState extends State<Allitems> {
-  List<String> items1 = [
-    'asset/bag.jpg',
-    'asset/shoeimage2.jpg',
-    'asset/haircare.jpg',
-    'asset/kidsshoes.jpg',
-    'asset/mamaearth.jpg'
-  ];
   List<String> itemname = [
     'Gucci bag',
     'Nike shoes',
     'Haircare',
+    'MamaEarth',
     'kids Shoes',
-    'MamaEarth'
   ];
 
+  List<String> imageUrl1 = [];
+  final storage = FirebaseStorage.instance;
+
   @override
+  void initState() {
+    super.initState();
+    // print('helooooooooo');
+
+    getImageUrl();
+  }
+
+  Future<void> getImageUrl() async {
+    var storage = FirebaseStorage.instance;
+    var strorageRef = storage.ref().child('allitems');
+    var list = await strorageRef.listAll();
+    // print('@@@@@@@@@@@@@@@@ $list');
+    await Future.forEach(list.items, (Reference ref) async {
+      var url = await ref.getDownloadURL();
+      // print("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeee $url");
+      setState(() {
+        imageUrl1.add(url);
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
+    var temlist = [];
+
+    if (imageUrl1 == imageUrl1) {
+      temlist.addAll(itemname);
+    } else {
+      if (imageUrl1 == imageUrl1) {
+        temlist.addAll(itemname);
+      } else {
+        if (imageUrl1 == imageUrl1) {
+          temlist.addAll(itemname);
+        }
+      }
+    }
     return Scaffold(
       body: ListView(
         children: [
@@ -185,11 +219,13 @@ class _AllitemsState extends State<Allitems> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(10.0),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Text(
                   'Popular',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: GoogleFonts.mPlus1(
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
               ),
               Padding(
@@ -199,7 +235,7 @@ class _AllitemsState extends State<Allitems> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const seeall1(),
+                            builder: (context) => seeall1(),
                           ));
                     },
                     child: const Text(
@@ -212,7 +248,7 @@ class _AllitemsState extends State<Allitems> {
           LimitedBox(
             maxHeight: 260,
             child: ListView.builder(
-              itemCount: 5,
+              itemCount: imageUrl1.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
@@ -266,9 +302,9 @@ class _AllitemsState extends State<Allitems> {
                                 borderRadius:
                                     BorderRadiusDirectional.circular(15)),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset(
-                                items1[index],
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.network(
+                                imageUrl1[index],
                                 fit: BoxFit.cover,
                               ),
                             )),
@@ -282,8 +318,10 @@ class _AllitemsState extends State<Allitems> {
                           children: [
                             Text(
                               itemname[index],
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.mPlus1(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
                             ),
                             const SizedBox(width: 50),
                             Padding(
@@ -326,11 +364,13 @@ class _AllitemsState extends State<Allitems> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(10.0),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: Text(
                   'New Arrival',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: GoogleFonts.mPlus1(
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
               ),
               Padding(
@@ -340,7 +380,7 @@ class _AllitemsState extends State<Allitems> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const seeall1(),
+                            builder: (context) => seeall1(),
                           ));
                     },
                     child: const Text(
@@ -408,16 +448,19 @@ class _AllitemsState extends State<Allitems> {
                           top: 10,
                           child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 'Chanel Bag',
-                                style: TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.bold),
+                                style: GoogleFonts.mPlus1(
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
                               ),
                               const SizedBox(height: 10),
-                              const Text(
+                              Text(
                                 '''Lorem ipsum is best always
 sum is best always''',
-                                style: TextStyle(fontSize: 10),
+                                style: GoogleFonts.mPlus1(
+                                    textStyle: const TextStyle(fontSize: 10)),
                               ),
                               const SizedBox(height: 20),
                               Row(

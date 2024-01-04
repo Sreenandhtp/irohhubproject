@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+
 import 'package:irohubproject/controller/authcontroller.dart';
 import 'package:irohubproject/loginpage.dart';
 
@@ -139,25 +139,31 @@ class _SigninpageState extends State<Signinpage> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Are you agree to the.."),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Signinpage(),
-                            ));
-                      },
-                      child: const Text(
-                        'Terms & conditions ',
-                        style: TextStyle(color: Colors.blue),
-                      ))
-                ],
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Are you agree to the..",
+                      style: TextStyle(fontSize: 13),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Signinpage(),
+                              ));
+                        },
+                        child: const Text(
+                          'Terms & conditions ',
+                          style: TextStyle(color: Colors.blue, fontSize: 13),
+                        ))
+                  ],
+                ),
               ),
             )
           ],

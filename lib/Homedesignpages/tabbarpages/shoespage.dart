@@ -1,4 +1,6 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
 class Shoespage extends StatefulWidget {
@@ -9,30 +11,39 @@ class Shoespage extends StatefulWidget {
 }
 
 class _ShoespageState extends State<Shoespage> {
+  List<String> shoesimage = [];
+  final storage = FirebaseStorage.instance;
   @override
+  void initState() {
+    super.initState();
+    getImageUrl();
+  }
+
+  Future<void> getImageUrl() async {
+    var storage = FirebaseStorage.instance;
+    var strorageRef = storage.ref().child('Shoeimages');
+    var list = await strorageRef.listAll();
+
+    await Future.forEach(list.items, (Reference ref) async {
+      var url = await ref.getDownloadURL();
+
+      setState(() {
+        shoesimage.add(url);
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
-    List<String> shoeimages = [
-      'asset/shoeimage2.jpg',
-      'asset/adidas.jpg',
-      'asset/puma.jpg',
-      'asset/coverse.jpg',
-      'asset/nb.jpg',
-      'asset/beneten.jpg',
-      'asset/bata.jpg',
-      'asset/sparx.jpg',
-      'asset/redtape.jpg',
-      'asset/woodland.jpg'
-    ];
     List<String> Shoenames = [
-      'Nike',
       'Adidas',
-      'puma',
+      'Bata',
+      'Beneten',
       'Convers',
       'NB',
-      'Beneten',
-      'Bata',
-      'Sparx',
+      'puma',
       'Red Tape',
+      'Nike',
+      'Sparx',
       'WoodLand'
     ];
     List<String> shoeprice = [
@@ -52,7 +63,7 @@ class _ShoespageState extends State<Shoespage> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: GridView.builder(
-            itemCount: 10,
+            itemCount: shoesimage.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               mainAxisExtent: 220,
               crossAxisSpacing: 15,
@@ -78,19 +89,41 @@ class _ShoespageState extends State<Shoespage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          height: 120,
-                          width: 150,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 233, 232, 232),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              shoeimages[index],
-                              fit: BoxFit.cover,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 125,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 233, 232, 232),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(
+                                  shoesimage[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
-                          ),
+                            Positioned(
+                                left: 109,
+                                child: Container(
+                                  height: 34,
+                                  width: 34,
+                                  decoration: const BoxDecoration(
+                                      color: Color.fromARGB(255, 240, 238, 238),
+                                      shape: BoxShape.circle),
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.favorite_border_sharp,
+                                        size: 20,
+                                        color:
+                                            Color.fromARGB(255, 104, 103, 103),
+                                      )),
+                                ))
+                          ],
                         ),
                       ),
                       Padding(
@@ -100,8 +133,10 @@ class _ShoespageState extends State<Shoespage> {
                           children: [
                             Text(
                               Shoenames[index],
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.mPlus1(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
                             ),
                             Container(
                               height: 28,

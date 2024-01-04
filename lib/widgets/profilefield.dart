@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/myprofile.dart';
 
 class Profilefields extends StatelessWidget {
@@ -33,7 +34,9 @@ class Profilefields extends StatelessWidget {
                   const SizedBox(width: 25),
                   Text(
                     profilefieldtext,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: GoogleFonts.mPlus1(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
                   ),
                 ],
               ),

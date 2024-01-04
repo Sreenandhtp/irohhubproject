@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Filterpage extends StatefulWidget {
   const Filterpage({super.key});
@@ -60,13 +61,15 @@ class _FilterpageState extends State<Filterpage> {
                     hintText: 'Search', border: UnderlineInputBorder()),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(12.0),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Sort by',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.mPlus1(
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
               ),
             ),
@@ -83,10 +86,11 @@ class _FilterpageState extends State<Filterpage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Featured',
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                         Checkbox(
                           value: ischecked,
@@ -114,10 +118,11 @@ class _FilterpageState extends State<Filterpage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'New Items',
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                         Checkbox(
                           value: ischecked1,
@@ -145,10 +150,11 @@ class _FilterpageState extends State<Filterpage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Price(high)',
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                         Checkbox(
                           value: ischecked2,
@@ -176,10 +182,11 @@ class _FilterpageState extends State<Filterpage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Price(low)',
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                         Checkbox(
                           value: ischecked3,
@@ -194,13 +201,15 @@ class _FilterpageState extends State<Filterpage> {
                     ),
                   ),
                 )),
-            const Padding(
-              padding: EdgeInsets.all(12.0),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   'Categories',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.mPlus1(
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
               ),
             ),
@@ -213,12 +222,11 @@ class _FilterpageState extends State<Filterpage> {
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonFormField(
                     decoration: const InputDecoration(border: InputBorder.none),
-                    hint: const Text(
+                    hint: Text(
                       '   Price',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                     elevation: 0,
                     borderRadius: BorderRadius.circular(10),
@@ -226,11 +234,14 @@ class _FilterpageState extends State<Filterpage> {
                       return DropdownMenuItem(
                           value: price,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(price,
-                                style: const TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.bold)),
-                          ));
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                price,
+                                style: GoogleFonts.mPlus1(
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
+                              )));
                     }).toList(),
                     onChanged: (String? newvalue) {
                       setState(() {
@@ -248,12 +259,11 @@ class _FilterpageState extends State<Filterpage> {
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonFormField(
                     decoration: const InputDecoration(border: InputBorder.none),
-                    hint: const Text(
+                    hint: Text(
                       '   Brands',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                     elevation: 0,
                     borderRadius: BorderRadius.circular(10),
@@ -261,11 +271,14 @@ class _FilterpageState extends State<Filterpage> {
                       return DropdownMenuItem(
                           value: brands,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(brands,
-                                style: const TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.bold)),
-                          ));
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                brands,
+                                style: GoogleFonts.mPlus1(
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
+                              )));
                     }).toList(),
                     onChanged: (String? newvalue) {
                       setState(() {
@@ -283,12 +296,11 @@ class _FilterpageState extends State<Filterpage> {
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonFormField(
                     decoration: const InputDecoration(border: InputBorder.none),
-                    hint: const Text(
+                    hint: Text(
                       '   Colors',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                     elevation: 0,
                     borderRadius: BorderRadius.circular(10),
@@ -296,11 +308,14 @@ class _FilterpageState extends State<Filterpage> {
                       return DropdownMenuItem(
                           value: colors,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(colors,
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
-                          ));
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                colors,
+                                style: GoogleFonts.mPlus1(
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
+                              )));
                     }).toList(),
                     onChanged: (String? newvalue) {
                       setState(() {
@@ -318,12 +333,11 @@ class _FilterpageState extends State<Filterpage> {
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonFormField(
                     decoration: const InputDecoration(border: InputBorder.none),
-                    hint: const Text(
+                    hint: Text(
                       '   Size',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                     elevation: 0,
                     borderRadius: BorderRadius.circular(10),
@@ -334,8 +348,10 @@ class _FilterpageState extends State<Filterpage> {
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
                               size,
-                              style: const TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.mPlus1(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
                             ),
                           ));
                     }).toList(),
@@ -355,12 +371,11 @@ class _FilterpageState extends State<Filterpage> {
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonFormField(
                     decoration: const InputDecoration(border: InputBorder.none),
-                    hint: const Text(
+                    hint: Text(
                       '   Catogories',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                     elevation: 0,
                     borderRadius: BorderRadius.circular(10),
@@ -368,11 +383,14 @@ class _FilterpageState extends State<Filterpage> {
                       return DropdownMenuItem(
                           value: catogories,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(catogories,
-                                style: const TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.bold)),
-                          ));
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                catogories,
+                                style: GoogleFonts.mPlus1(
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
+                              )));
                     }).toList(),
                     onChanged: (String? newvalue) {
                       setState(() {
@@ -391,9 +409,13 @@ class _FilterpageState extends State<Filterpage> {
                 onPressed: () {},
                 style:
                     ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
-                child: const Text(
+                child: Text(
                   'APPLY',
-                  style: TextStyle(color: Colors.white),
+                  style: GoogleFonts.mPlus1(
+                      textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18)),
                 ),
               ),
             ),

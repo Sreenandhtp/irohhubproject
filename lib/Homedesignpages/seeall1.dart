@@ -1,16 +1,44 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
 class seeall1 extends StatefulWidget {
-  const seeall1({super.key});
+  seeall1({super.key});
 
   @override
   State<seeall1> createState() => _seeall1State();
 }
 
 class _seeall1State extends State<seeall1> {
+  List<String> shoesimage1 = [];
+  // List<String> bagimage1 = [];
+  final storage = FirebaseStorage.instance;
   @override
+  void initState() {
+    super.initState();
+    getImageUrl();
+  }
+
+  @override
+  Future<void> getImageUrl() async {
+    var storage = FirebaseStorage.instance;
+    var strorageRef = storage.ref().child('Shoeimages');
+  
+
+    var list = await strorageRef.listAll();
+  
+
+    await Future.forEach(list.items, (Reference ref) async {
+      var url = await ref.getDownloadURL();
+
+      setState(() {
+        shoesimage1.add(url);
+        // bagimage1.add(url);
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -39,7 +67,7 @@ class _seeall1State extends State<seeall1> {
               maxHeight: 260,
               child: SafeArea(
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: shoesimage1.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -98,8 +126,8 @@ class _seeall1State extends State<seeall1> {
                                         BorderRadiusDirectional.circular(15)),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    'asset/shoe6.jpg',
+                                  child: Image.network(
+                                    shoesimage1[index],
                                     fit: BoxFit.cover,
                                   ),
                                 )),
@@ -129,7 +157,7 @@ class _seeall1State extends State<seeall1> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {},       
                                         icon: const Icon(
                                           Icons.shopping_cart_checkout_outlined,
                                           color: Colors.white,
@@ -221,8 +249,8 @@ class _seeall1State extends State<seeall1> {
                                       BorderRadiusDirectional.circular(15)),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  'asset/Facecare1.jpg',
+                                child: Image.network(
+                                  '',
                                   fit: BoxFit.cover,
                                 ),
                               )),

@@ -11,7 +11,17 @@ class CartPage extends StatefulWidget {
 
 class _MycartState extends State<CartPage> {
   var size, height, width;
-  bool? ischecked = false;
+
+  List<String> itemsName = [
+    'Item1',
+    'Item1',
+    'Item1',
+    'Item1',
+    'Item1',
+    'Item1',
+    'Item1',
+    'Item1'
+  ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -59,34 +69,42 @@ class _MycartState extends State<CartPage> {
             color: Colors.white,
           ),
           child: ListView.builder(
-              itemCount: 10,
+              itemCount: itemsName.length,
               itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          activeColor: Colors.redAccent,
-                          shape: const CircleBorder(),
-                          value: ischecked,
-                          onChanged: (value) {
-                            setState(() {
-                              ischecked = value;
-                            });
-                          },
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const Selecteditempage(),
-                                ));
-                          },
+                return Dismissible(
+                  key: UniqueKey(),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    setState(() {
+                      itemsName.removeAt(index);
+                    });
+                  },
+                  background: Container(
+                    height: 100,
+                    width: size.width,
+                    padding: const EdgeInsets.only(right: 15.0),
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    child: const Icon(
+                      Icons.delete_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Selecteditempage(),
+                              ));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 10),
                           child: Container(
-                            height: 120,
-                            width: 340,
+                            height: 100,
+                            width: 400,
                             decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 237, 237, 237),
                                 borderRadius: BorderRadius.circular(10)),
@@ -96,13 +114,17 @@ class _MycartState extends State<CartPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10),
                                   child: Container(
-                                    height: 100,
-                                    width: 100,
+                                    height: 90,
+                                    width: 90,
                                     decoration: BoxDecoration(
                                         color: const Color.fromARGB(
                                             255, 202, 201, 201),
                                         borderRadius:
                                             BorderRadius.circular(10)),
+                                    // child: Image.network(
+                                    //   '',
+                                    //   fit: BoxFit.cover,
+                                    // ),
                                   ),
                                 ),
                                 Padding(
@@ -110,29 +132,26 @@ class _MycartState extends State<CartPage> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        'Selected items',
+                                        itemsName[index],
                                         style: GoogleFonts.mPlus1(
                                             textStyle: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16)),
                                       ),
                                       const SizedBox(
-                                        height: 40,
+                                        height: 15,
                                       ),
-                                      const Padding(
-                                        padding: EdgeInsets.only(right: 60),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.attach_money_outlined,
-                                                size: 18),
-                                            Text(
-                                              '50.00',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
-                                        ),
+                                      const Row(
+                                        children: [
+                                          Icon(Icons.attach_money_outlined,
+                                              size: 18),
+                                          Text(
+                                            '50.00',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -141,12 +160,12 @@ class _MycartState extends State<CartPage> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    )
-                  ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  ),
                 );
               }),
         ),

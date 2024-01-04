@@ -1,4 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
 class bagspage extends StatefulWidget {
@@ -9,20 +12,29 @@ class bagspage extends StatefulWidget {
 }
 
 class _bagspageState extends State<bagspage> {
+  List<String> bagimage = [];
+  final storage = FirebaseStorage.instance;
   @override
+  void initState() {
+    super.initState();
+    getImageUrl();
+  }
+
+  Future<void> getImageUrl() async {
+    var storage = FirebaseStorage.instance;
+    var strorageRef = storage.ref().child('bagimages');
+    var list = await strorageRef.listAll();
+
+    await Future.forEach(list.items, (Reference ref) async {
+      var url = await ref.getDownloadURL();
+
+      setState(() {
+        bagimage.add(url);
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
-    List<String> bagimages = [
-      'asset/selectedbag.jpg',
-      'asset/bagimage1.jpg',
-      'asset/bag1.jpg',
-      'asset/bagimage3.jpg',
-      'asset/bagimage4.jpg',
-      'asset/bagimage5.jpg',
-      'asset/bagimage6.jpg',
-      'asset/bagimage7.jpg',
-      'asset/bagimage8.jpg',
-      'asset/bagimage9.jpg'
-    ];
     List<String> bagname = [
       'Gucci',
       'Louis Vuitton',
@@ -40,7 +52,7 @@ class _bagspageState extends State<bagspage> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: GridView.builder(
-            itemCount: 10,
+            itemCount: bagimage.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               mainAxisExtent: 220,
               crossAxisSpacing: 15,
@@ -66,19 +78,41 @@ class _bagspageState extends State<bagspage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          height: 120,
-                          width: 160,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 233, 232, 232),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              bagimages[index],
-                              fit: BoxFit.cover,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 120,
+                              width: 160,
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 233, 232, 232),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  bagimage[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
-                          ),
+                            Positioned(
+                                left: 119,
+                                child: Container(
+                                  height: 34,
+                                  width: 34,
+                                  decoration: const BoxDecoration(
+                                      color: Color.fromARGB(255, 240, 238, 238),
+                                      shape: BoxShape.circle),
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.favorite_border_sharp,
+                                        size: 20,
+                                        color:
+                                            Color.fromARGB(255, 104, 103, 103),
+                                      )),
+                                ))
+                          ],
                         ),
                       ),
                       Padding(
@@ -88,8 +122,10 @@ class _bagspageState extends State<bagspage> {
                           children: [
                             Text(
                               bagname[index],
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.mPlus1(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
                             ),
                             Container(
                               height: 28,

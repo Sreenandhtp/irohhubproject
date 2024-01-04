@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
 class Skincarepage extends StatefulWidget {
@@ -74,10 +75,12 @@ class _SkincarepageState extends State<Skincarepage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'MamaEarth',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.mPlus1(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
                             ),
                             Container(
                               height: 28,

@@ -56,7 +56,7 @@ class _HomepageState extends State<Home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MapSample(),
+                          builder: (context) => const Trackingorder(),
                         ));
                   },
                   icon: const Icon(
@@ -102,7 +102,7 @@ class _HomepageState extends State<Home> {
                 preferredSize: const Size.fromHeight(50)),
           ),
         ),
-        body: const DefaultTabController(
+        body: DefaultTabController(
           animationDuration: Durations.medium3,
           length: 5,
           child: Column(
@@ -110,13 +110,14 @@ class _HomepageState extends State<Home> {
               TabBar(
                   tabAlignment: TabAlignment.start,
                   isScrollable: true,
-                  unselectedLabelStyle:
-                      TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+                  unselectedLabelStyle: GoogleFonts.mPlus1(
+                      textStyle: const TextStyle(fontSize: 16)),
                   indicatorColor: Colors.redAccent,
-                  labelStyle:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  labelStyle: GoogleFonts.mPlus1(
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20)),
                   labelColor: Colors.black,
-                  tabs: [
+                  tabs: const [
                     Tab(
                       text: 'All',
                     ),

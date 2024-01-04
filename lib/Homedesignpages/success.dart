@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Successpage extends StatefulWidget {
   const Successpage({super.key});
@@ -16,9 +17,11 @@ class _SuccesspageState extends State<Successpage> {
         Center(
           child: Image.asset('asset/tik.png'),
         ),
-        const Text(
+        Text(
           'Payment Successful',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: GoogleFonts.mPlus1(
+              textStyle:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
         ),
         const SizedBox(
           height: 80,

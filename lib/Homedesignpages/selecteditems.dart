@@ -17,6 +17,7 @@ class _SelecteditempageState extends State<Selecteditempage> {
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -86,10 +87,24 @@ class _SelecteditempageState extends State<Selecteditempage> {
               SizedBox(
                 height: 280,
                 width: double.infinity,
-                child: Image.asset(
-                  'asset/selectedbag.jpg',
-                  fit: BoxFit.cover,
-                ),
+                child: Stack(children: [
+                  SizedBox(
+                    height: 250,
+                    width: double.infinity,
+                    child: Image.asset(
+                      'asset/selectedbag.jpg',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                      left: 350,
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.favorite_border_sharp,
+                            size: 30,
+                          )))
+                ]),
               ),
               // Positioned(
               //     child: Column(
@@ -122,15 +137,16 @@ class _SelecteditempageState extends State<Selecteditempage> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Column(children: [
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Nike Air Max',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.w600),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22)),
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Row(
                               children: [
@@ -176,19 +192,21 @@ class _SelecteditempageState extends State<Selecteditempage> {
                     const SizedBox(
                       height: 50,
                     ),
-                    const Align(
+                    Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         'Details',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
+                        style: GoogleFonts.mPlus1(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20)),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(10.0),
+                    Padding(
+                      padding: const EdgeInsets.all(6.0),
                       child: Text(
                         'Let him understand these little things. My eternal salvation is anticipatory, for he does not receive it. And these little elites must understand the antiope to receive',
-                        style: TextStyle(fontSize: 15),
+                        style: GoogleFonts.mPlus1(
+                            textStyle: const TextStyle(fontSize: 18)),
                       ),
                     ),
                     const SizedBox(height: 30),

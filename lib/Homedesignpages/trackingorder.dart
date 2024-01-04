@@ -14,49 +14,36 @@ class _TrackingorderState extends State<Trackingorder> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 238, 238, 238),
-      body: SafeArea(
-        child: Column(children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Track the order',
-                    style: GoogleFonts.mPlus1(
-                        textStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25)),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.only(right: 15),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromARGB(255, 225, 224, 224),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.more_vert,
-                            color: Color.fromARGB(255, 45, 45, 45)),
-                      )),
-                ],
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Column(
+            children: [
+              ListTile(
+                leading: Text(
+                  'Track your order',
+                  style: GoogleFonts.mPlus1(
+                      textStyle:
+                          const TextStyle(fontSize: 28, color: Colors.black)),
+                ),
+                trailing: const Icon(Icons.more_vert),
               ),
-            ),
+              SizedBox(
+                height: 300,
+                child: ListView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      width: size.width,
+                      height: size.height / 2,
+                      color: Colors.white,
+                    ),
+                  );
+                }),
+              )
+            ],
           ),
-          const SizedBox(height: 30),
-          ListView.builder(
-              itemCount: 2,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: size.height / 3,
-                  width: size.width,
-                  color: Colors.blue,
-                );
-              })
-        ]),
-      ),
-    );
+        ));
   }
 }

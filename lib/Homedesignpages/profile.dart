@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/myprofile.dart';
 import 'package:irohubproject/controller/authcontroller.dart';
 import 'package:irohubproject/loginpage.dart';
@@ -50,9 +51,11 @@ class _ProfilepageState extends State<Profilepage> {
                     backgroundImage: AssetImage('asset/IMG_9486.jpg')),
               ),
             ),
-            const Text(
+            Text(
               'Your Name',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: GoogleFonts.mPlus1(
+                  textStyle: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20)),
             ),
             const SizedBox(
               height: 50,

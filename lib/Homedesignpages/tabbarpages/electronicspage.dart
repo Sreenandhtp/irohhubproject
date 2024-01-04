@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
 class Electronicspage extends StatefulWidget {
@@ -88,8 +89,10 @@ class _ElectronicspageState extends State<Electronicspage> {
                           children: [
                             Text(
                               electroitemname[index],
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.mPlus1(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16)),
                             ),
                             Container(
                               height: 28,

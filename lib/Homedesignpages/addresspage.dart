@@ -38,10 +38,13 @@ class _AddresspageState extends State<Addresspage> {
               size: 25,
               color: Colors.black,
             )),
-        title: const Text(
+        title: Text(
           'Add Your Address',
-          style: TextStyle(
-              fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
+          style: GoogleFonts.mPlus1(
+              textStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Colors.black)),
         ),
         elevation: 0,
       ),
@@ -51,33 +54,33 @@ class _AddresspageState extends State<Addresspage> {
           child: SafeArea(
             child: Column(
               children: [
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'Country',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(11.0),
                   child: Container(
-                    height: 45,
+                    height: 50,
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 245, 243, 243),
                         borderRadius: BorderRadius.circular(10)),
                     child: DropdownButtonFormField(
                         decoration:
                             const InputDecoration(border: InputBorder.none),
-                        hint: const Text(
+                        hint: Text(
                           '  Select Country',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18)),
                         ),
                         elevation: 0,
                         borderRadius: BorderRadius.circular(10),
@@ -85,12 +88,14 @@ class _AddresspageState extends State<Addresspage> {
                           return DropdownMenuItem(
                               value: country,
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text(country,
-                                    style: const TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold)),
-                              ));
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    country,
+                                    style: GoogleFonts.mPlus1(
+                                        textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18)),
+                                  )));
                         }).toList(),
                         onChanged: (String? newvalue) {
                           setState(() {
@@ -99,36 +104,40 @@ class _AddresspageState extends State<Addresspage> {
                         }),
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'Fullname',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
-                    height: 40,
+                    height: 50,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 245, 243, 243),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 10, bottom: 7),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10, bottom: 7),
                       child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none),
-                        style: TextStyle(fontSize: 18),
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                        style: GoogleFonts.mPlus1(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18)),
                       ),
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(10.0),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -136,14 +145,16 @@ class _AddresspageState extends State<Addresspage> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           'City',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18)),
                         ),
                       ),
                       Text(
                         'Pincode',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.mPlus1(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18)),
                       ),
                     ],
                   ),
@@ -153,18 +164,20 @@ class _AddresspageState extends State<Addresspage> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
-                        height: 40,
+                        height: 50,
                         width: 220,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 245, 243, 243),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10, bottom: 7),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, bottom: 7),
                           child: TextField(
                             decoration:
-                                InputDecoration(border: InputBorder.none),
-                            style: TextStyle(fontSize: 18),
+                                const InputDecoration(border: InputBorder.none),
+                            style: GoogleFonts.mPlus1(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 17)),
                           ),
                         ),
                       ),
@@ -172,61 +185,68 @@ class _AddresspageState extends State<Addresspage> {
                     Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Container(
-                        height: 40,
-                        width: 100,
+                        height: 50,
+                        width: 130,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 245, 243, 243),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
                           child: TextField(
                             keyboardType: TextInputType.number,
                             decoration:
-                                InputDecoration(border: InputBorder.none),
-                            style: TextStyle(fontSize: 18),
+                                const InputDecoration(border: InputBorder.none),
+                            style: GoogleFonts.mPlus1(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16)),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'Delivery Address',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
-                    height: 40,
+                    height: 50,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 245, 243, 243),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 10, bottom: 7),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10, bottom: 7),
                       child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none),
-                        style: TextStyle(fontSize: 18),
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                        style: GoogleFonts.mPlus1(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18)),
                       ),
                     ),
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'Contact No',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
                     ),
                   ),
                 ),
@@ -236,7 +256,7 @@ class _AddresspageState extends State<Addresspage> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Container(
-                        height: 45,
+                        height: 50,
                         width: 70,
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 245, 243, 243),
@@ -275,13 +295,15 @@ class _AddresspageState extends State<Addresspage> {
                           color: const Color.fromARGB(255, 245, 243, 243),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10, bottom: 7),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, bottom: 7),
                           child: TextField(
                             keyboardType: TextInputType.number,
                             decoration:
-                                InputDecoration(border: InputBorder.none),
-                            style: TextStyle(fontSize: 18),
+                                const InputDecoration(border: InputBorder.none),
+                            style: GoogleFonts.mPlus1(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18)),
                           ),
                         ),
                       ),

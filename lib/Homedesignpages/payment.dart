@@ -127,14 +127,15 @@ class _PaymentpageState extends State<Paymentpage> {
                     ),
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       'Card Number',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
                     ),
                   ),
                 ),
@@ -146,33 +147,38 @@ class _PaymentpageState extends State<Paymentpage> {
                       color: const Color.fromARGB(255, 245, 243, 243),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
                       child: TextField(
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(border: InputBorder.none),
-                        style: TextStyle(fontSize: 20),
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                        style: GoogleFonts.mPlus1(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18)),
                       ),
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(10.0),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     children: [
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'DATE',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          'Date',
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18)),
                         ),
                       ),
-                      SizedBox(width: 170),
+                      const SizedBox(width: 170),
                       Text(
-                        'CVV',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        'cvv',
+                        style: GoogleFonts.mPlus1(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18)),
                       ),
                     ],
                   ),
@@ -188,13 +194,15 @@ class _PaymentpageState extends State<Paymentpage> {
                           color: const Color.fromARGB(255, 245, 243, 243),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
                           child: TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: 'DD/MM/YYYY',
                                 border: InputBorder.none),
-                            style: TextStyle(fontSize: 17),
+                            style: GoogleFonts.mPlus1(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18)),
                           ),
                         ),
                       ),
@@ -206,13 +214,15 @@ class _PaymentpageState extends State<Paymentpage> {
                         color: const Color.fromARGB(255, 245, 243, 243),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.only(left: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
                         child: TextField(
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'XXX', border: InputBorder.none),
-                          style: TextStyle(fontSize: 17),
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18)),
                         ),
                       ),
                     ),
@@ -241,10 +251,11 @@ class _PaymentpageState extends State<Paymentpage> {
                                   size: 35,
                                 )),
                           ),
-                          const Text(
+                          Text(
                             'Add Another Methods',
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.bold),
+                            style: GoogleFonts.mPlus1(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16)),
                           )
                         ],
                       )),
