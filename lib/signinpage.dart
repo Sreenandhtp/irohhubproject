@@ -49,7 +49,7 @@ class _SigninpageState extends State<Signinpage> {
               color: Colors.black,
             )),
         title: const Text(
-          'Sign In',
+          'Sign Up',
           style: TextStyle(
               fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
         ),

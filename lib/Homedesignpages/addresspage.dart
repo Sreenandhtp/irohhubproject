@@ -10,16 +10,22 @@ class Addresspage extends StatefulWidget {
 }
 
 class _AddresspageState extends State<Addresspage> {
-  String dropcountrynamevalue = 'USA(United State America)';
-  var country = [
-    'USA(United State America)',
-    'UK',
-    'Dubai',
-    'India',
-    'China',
-    'Japan',
-    'SriLenkha',
-    'Australia'
+  String dropcountrynamevalue = 'Kasargode';
+  var district = [
+    'Kasargode',
+    'Kannur',
+    'Kozhikode',
+    'Vayanadu',
+    'Thrissur',
+    'Palakkad',
+    'Malappuram',
+    'Ernakulam',
+    'Edukki',
+    'Alappuzha',
+    'Kollam',
+    'Pathanamthitta',
+    'Kottayam',
+    'Thiruvanandhappuarm'
   ];
   String dropphonevalue = '+91';
   var phone = ['+91', '+90', '+14', '70'];
@@ -59,7 +65,7 @@ class _AddresspageState extends State<Addresspage> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      'Country',
+                      'Enter Your District',
                       style: GoogleFonts.mPlus1(
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18)),
@@ -77,14 +83,14 @@ class _AddresspageState extends State<Addresspage> {
                         decoration:
                             const InputDecoration(border: InputBorder.none),
                         hint: Text(
-                          '  Select Country',
+                          '  Select District',
                           style: GoogleFonts.mPlus1(
                               textStyle: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 18)),
                         ),
                         elevation: 0,
                         borderRadius: BorderRadius.circular(10),
-                        items: country.map((String country) {
+                        items: district.map((String country) {
                           return DropdownMenuItem(
                               value: country,
                               child: Padding(

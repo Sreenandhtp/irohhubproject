@@ -85,9 +85,13 @@ class _MycartState extends State<CartPage> {
                     padding: const EdgeInsets.only(right: 15.0),
                     color: Colors.red,
                     alignment: Alignment.centerRight,
-                    child: const Icon(
-                      Icons.delete_rounded,
-                      color: Colors.white,
+                    child: Text(
+                      "delete",
+                      style: GoogleFonts.mPlus1(
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.white)),
                     ),
                   ),
                   child: Column(
@@ -97,7 +101,7 @@ class _MycartState extends State<CartPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Selecteditempage(),
+                                builder: (context) => Selecteditempage(),
                               ));
                         },
                         child: Padding(

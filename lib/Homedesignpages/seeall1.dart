@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/selecteditems.dart';
 
 class seeall1 extends StatefulWidget {
-  seeall1({super.key});
+  const seeall1({super.key});
 
   @override
   State<seeall1> createState() => _seeall1State();
@@ -12,29 +12,42 @@ class seeall1 extends StatefulWidget {
 
 class _seeall1State extends State<seeall1> {
   List<String> shoesimage1 = [];
-  // List<String> bagimage1 = [];
+  List<String> bagimage1 = [];
   final storage = FirebaseStorage.instance;
   @override
   void initState() {
     super.initState();
     getImageUrl();
+    getImageUrl1();
   }
 
   @override
   Future<void> getImageUrl() async {
     var storage = FirebaseStorage.instance;
-    var strorageRef = storage.ref().child('Shoeimages');
-  
+    var strorageRef = storage.ref().child('SHOEIMAGE');
 
     var list = await strorageRef.listAll();
-  
 
     await Future.forEach(list.items, (Reference ref) async {
       var url = await ref.getDownloadURL();
 
       setState(() {
         shoesimage1.add(url);
-        // bagimage1.add(url);
+      });
+    });
+  }
+
+  Future<void> getImageUrl1() async {
+    var storage = FirebaseStorage.instance;
+    var strorageRef = storage.ref().child('BAGIMAGE');
+
+    var list = await strorageRef.listAll();
+
+    await Future.forEach(list.items, (Reference ref) async {
+      var url = await ref.getDownloadURL();
+
+      setState(() {
+        bagimage1.add(url);
       });
     });
   }
@@ -95,10 +108,8 @@ class _seeall1State extends State<seeall1> {
                               height: 240,
                               width: 200,
                               decoration: BoxDecoration(
-                                  // boxShadow: const [
-                                  //   BoxShadow(blurRadius: 5, offset: Offset(1, 0))
-                                  // ],
-                                  color: Color.fromARGB(255, 239, 238, 238),
+                                  color:
+                                      const Color.fromARGB(255, 239, 238, 238),
                                   borderRadius:
                                       BorderRadiusDirectional.circular(10)),
                             ),
@@ -146,7 +157,7 @@ class _seeall1State extends State<seeall1> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
                                 ),
-                                const SizedBox(width: 50),
+                                const SizedBox(width: 50),    
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: Container(
@@ -157,7 +168,7 @@ class _seeall1State extends State<seeall1> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: IconButton(
-                                        onPressed: () {},       
+                                        onPressed: () {},
                                         icon: const Icon(
                                           Icons.shopping_cart_checkout_outlined,
                                           color: Colors.white,
@@ -191,7 +202,7 @@ class _seeall1State extends State<seeall1> {
             LimitedBox(
               maxHeight: 260,
               child: ListView.builder(
-                itemCount: 5,
+                itemCount: bagimage1.length,
                 scrollDirection: axisDirectionToAxis(AxisDirection.right),
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
@@ -218,9 +229,6 @@ class _seeall1State extends State<seeall1> {
                             height: 280,
                             width: 200,
                             decoration: BoxDecoration(
-                                // boxShadow: const [
-                                //   BoxShadow(blurRadius: 5, offset: Offset(1, 0))
-                                // ],
                                 color: const Color.fromARGB(255, 237, 236, 236),
                                 borderRadius:
                                     BorderRadiusDirectional.circular(10)),
@@ -250,7 +258,7 @@ class _seeall1State extends State<seeall1> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
-                                  '',
+                                  bagimage1[index],
                                   fit: BoxFit.cover,
                                 ),
                               )),

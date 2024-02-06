@@ -1,7 +1,6 @@
+import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/seeall1.dart';
@@ -15,53 +14,26 @@ class Allitems extends StatefulWidget {
 }
 
 class _AllitemsState extends State<Allitems> {
-  List<String> itemname = [
-    'Gucci bag',
-    'Nike shoes',
-    'Haircare',
-    'MamaEarth',
-    'kids Shoes',
-  ];
+ 
+  var allitems = [];
+  
+  getData() async {
+    var res = await FirebaseFirestore.instance
+        .collection("products")
+        .doc("homeitems")
+        .get();
 
-  List<String> imageUrl1 = [];
-  final storage = FirebaseStorage.instance;
+    allitems.addAll(res.data()?["items"]);
+    log("-------------- $allitems");
 
-  @override
-  void initState() {
-    super.initState();
-    // print('helooooooooo');
-
-    getImageUrl();
-  }
-
-  Future<void> getImageUrl() async {
-    var storage = FirebaseStorage.instance;
-    var strorageRef = storage.ref().child('allitems');
-    var list = await strorageRef.listAll();
-    // print('@@@@@@@@@@@@@@@@ $list');
-    await Future.forEach(list.items, (Reference ref) async {
-      var url = await ref.getDownloadURL();
-      // print("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeeeeee $url");
-      setState(() {
-        imageUrl1.add(url);
-      });
-    });
+    @override
+    void initState() {
+      super.initState();
+      getData();
+    }
   }
 
   Widget build(BuildContext context) {
-    var temlist = [];
-
-    if (imageUrl1 == imageUrl1) {
-      temlist.addAll(itemname);
-    } else {
-      if (imageUrl1 == imageUrl1) {
-        temlist.addAll(itemname);
-      } else {
-        if (imageUrl1 == imageUrl1) {
-          temlist.addAll(itemname);
-        }
-      }
-    }
     return Scaffold(
       body: ListView(
         children: [
@@ -235,7 +207,7 @@ class _AllitemsState extends State<Allitems> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => seeall1(),
+                            builder: (context) => const seeall1(),
                           ));
                     },
                     child: const Text(
@@ -245,122 +217,130 @@ class _AllitemsState extends State<Allitems> {
               )
             ],
           ),
-          LimitedBox(
-            maxHeight: 260,
-            child: ListView.builder(
-              itemCount: imageUrl1.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Stack(children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Selecteditempage(),
-                            ));
-                      },
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Selecteditempage(),
-                              ));
-                        },
-                        child: Container(
-                          height: 280,
-                          width: 200,
-                          decoration: BoxDecoration(
-                              // boxShadow: const [
-                              //   BoxShadow(blurRadius: 5, offset: Offset(1, 0))
-                              // ],
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadiusDirectional.circular(10)),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        child: Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Selecteditempage(),
-                              ));
-                        },
-                        child: Container(
-                            height: 160,
-                            width: 180,
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 250, 249, 249),
-                                borderRadius:
-                                    BorderRadiusDirectional.circular(15)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Image.network(
-                                imageUrl1[index],
-                                fit: BoxFit.cover,
-                              ),
-                            )),
-                      ),
-                    )),
-                    Positioned(
-                        top: 180,
-                        left: 14,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              itemname[index],
-                              style: GoogleFonts.mPlus1(
-                                  textStyle: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16)),
-                            ),
-                            const SizedBox(width: 50),
-                            Padding(
-                              padding: const EdgeInsets.all(2.0),
+          FutureBuilder(
+              future: getData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return LimitedBox(
+                    maxHeight: 260,
+                    child: ListView.builder(
+                      itemCount: allitems.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Stack(children: [
+                            InkWell(
+                              onTap: () {
+                                // getData();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Selecteditempage(),
+                                    ));
+                              },
                               child: Container(
-                                height: 35,
-                                width: 35,
+                                height: 280,
+                                width: 200,
                                 decoration: BoxDecoration(
-                                    color: Colors.redAccent,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.card_travel_sharp,
-                                      color: Colors.white,
-                                      size: 20,
+                                    // boxShadow: const [
+                                    //   BoxShadow(blurRadius: 5, offset: Offset(1, 0))
+                                    // ],
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadiusDirectional.circular(10)),
+                              ),
+                            ),
+                            Positioned(
+                                child: Padding(
+                              padding: const EdgeInsets.all(11.0),
+                              child: InkWell(
+                                onTap: () {
+                                  getData();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Selecteditempage(
+                                          selelctedAllitems: allitems[index],
+                                        ),
+                                      ));
+                                },
+                                child: Container(
+                                    height: 160,
+                                    width: 180,
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 250, 249, 249),
+                                        borderRadius:
+                                            BorderRadiusDirectional.circular(
+                                                15)),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(6),
+                                      child: Image.network(
+                                        allitems[index]["image"],
+                                        fit: BoxFit.cover,
+                                      ),
                                     )),
                               ),
-                            )
-                          ],
-                        )),
-                    const Positioned(
-                        top: 210,
-                        left: 10,
-                        child: Row(
-                          children: [
-                            Icon(Icons.attach_money_outlined, size: 20),
-                            Text(
-                              '50.00',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ))
-                  ]),
-                );
-              },
-            ),
-          ),
+                            )),
+                            Positioned(
+                                top: 180,
+                                left: 14,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      allitems[index]["name"],
+                                      style: GoogleFonts.mPlus1(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16)),
+                                    ),
+                                    const SizedBox(width: 50),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Container(
+                                        height: 35,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                            color: Colors.redAccent,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                              Icons.card_travel_sharp,
+                                              color: Colors.white,
+                                              size: 20,
+                                            )),
+                                      ),
+                                    )
+                                  ],
+                                )),
+                            Positioned(
+                                top: 210,
+                                left: 10,
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.attach_money_outlined,
+                                        size: 20),
+                                    Text(
+                                      allitems[index]["price"],
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ))
+                          ]),
+                        );
+                      },
+                    ),
+                  );
+                }
+                return const SizedBox();
+              }),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -404,7 +384,7 @@ class _AllitemsState extends State<Allitems> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Selecteditempage(),
+                                builder: (context) => Selecteditempage(),
                               ));
                         },
                         child: Container(
@@ -423,8 +403,7 @@ class _AllitemsState extends State<Allitems> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const Selecteditempage(),
+                                  builder: (context) => Selecteditempage(),
                                 ));
                           },
                           child: Container(

@@ -8,6 +8,7 @@ import 'package:irohubproject/Homedesignpages/tabbarpages/electronicspage.dart';
 import 'package:irohubproject/Homedesignpages/tabbarpages/shoespage.dart';
 import 'package:irohubproject/Homedesignpages/tabbarpages/skincare.dart';
 import 'package:irohubproject/Homedesignpages/trackingorder.dart';
+import 'package:irohubproject/flashscreen.dart';
 import 'package:irohubproject/map/currentlocation.dart';
 
 class Home extends StatefulWidget {
@@ -44,7 +45,7 @@ class _HomepageState extends State<Home> {
               ),
             ),
             title: Text(
-              'Hi, Sreenandh...',
+              'Hi,$finalemail',
               style: GoogleFonts.kanit(
                   fontSize: 20,
                   fontWeight: FontWeight.normal,
@@ -106,6 +107,7 @@ class _HomepageState extends State<Home> {
           animationDuration: Durations.medium3,
           length: 5,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TabBar(
                   tabAlignment: TabAlignment.start,

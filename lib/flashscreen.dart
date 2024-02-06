@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:irohubproject/homepage.dart';
 import 'package:irohubproject/loginpage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String? finalemail;
 
 class Flashscreen extends StatefulWidget {
   const Flashscreen({super.key});
@@ -13,13 +17,26 @@ class Flashscreen extends StatefulWidget {
 class _FlashscreenState extends State<Flashscreen> {
   void initState() {
     super.initState();
-    Timer(
-        const Duration(seconds: 6),
-        () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const loginpage(),
-            )));
+    getValidationData().whenComplete(() async {
+      Timer(
+          const Duration(seconds: 3),
+          () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    finalemail == null ? const loginpage() : const Homepage(),
+              )));
+    });
+  }
+
+  Future getValidationData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedEmail = sharedPreferences.getString('email');
+    setState(() {
+      finalemail = obtainedEmail.toString();
+    });
+    print(finalemail);
   }
 
   @override

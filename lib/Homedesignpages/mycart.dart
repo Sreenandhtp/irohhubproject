@@ -93,9 +93,13 @@ class _MycartState extends State<Mycart> {
                         padding: const EdgeInsets.only(right: 15.0),
                         color: Colors.red,
                         alignment: Alignment.centerRight,
-                        child: const Icon(
-                          Icons.delete_rounded,
-                          color: Colors.white,
+                        child: Text(
+                          "delete",
+                          style: GoogleFonts.mPlus1(
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.white)),
                         ),
                       ),
                       child: Column(

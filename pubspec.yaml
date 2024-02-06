@@ -47,10 +47,12 @@ dependencies:
   firebase_core: ^2.13.1
   cloud_firestore: ^4.3.1
   firebase_auth: ^4.15.1
-  firebase_storage: ^11.5.4
+  firebase_storage: ^11.5.6
   get: ^4.6.6
   google_maps_flutter: ^2.5.0
   location: ^5.0.3
+  flutter_rating_bar: ^4.0.1
+  shared_preferences: ^2.2.2
 
   
 

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:irohubproject/Homedesignpages/home.dart';
 import 'package:irohubproject/controller/authcontroller.dart';
 import 'package:irohubproject/forgottpassword.dart';
@@ -9,6 +10,7 @@ import 'package:irohubproject/homepage.dart';
 import 'package:irohubproject/signinpage.dart';
 import 'package:irohubproject/verification.dart';
 import 'package:irohubproject/widgets/textfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class loginpage extends StatefulWidget {
   const loginpage({super.key});
@@ -22,6 +24,8 @@ class _loginpageState extends State<loginpage> {
 
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+  bool passwordObsecured = true;
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -80,18 +84,25 @@ class _loginpageState extends State<loginpage> {
             ),
             SizedBox(
               width: 330,
-              child: TextField(
+              height: 60,
+              child: TextFormField(
                 controller: passwordcontroller,
                 inputFormatters: [LengthLimitingTextInputFormatter(10)],
-                obscureText: true,
-                obscuringCharacter: '•',
+                obscureText: passwordObsecured,
                 style: const TextStyle(fontSize: 16),
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: const Color.fromARGB(255, 243, 241, 241),
-                    prefixIcon: const Icon(Icons.fingerprint),
-                    // suffix: IconButton(
-                    //     onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
+                    prefixIcon: const Icon(Icons.lock),
+                    suffix: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passwordObsecured = !passwordObsecured;
+                          });
+                        },
+                        icon: Icon(passwordObsecured
+                            ? Icons.visibility_off
+                            : Icons.visibility)),
                     border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(width: 5, color: Colors.black),
@@ -120,15 +131,33 @@ class _loginpageState extends State<loginpage> {
               height: 50,
               width: 330,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  final SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
+                  sharedPreferences.setString('email', emailcontroller.text);
                   Login();
+                  // Navigator.pushReplacement(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const Homepage(),
+                  //     ));
+
+                  setState(() {
+                    isLoading = true;
+                  });
+                  Future.delayed(const Duration(seconds: 3));
+                  // Login();
                 },
                 style:
                     ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
-                child: const Text(
-                  'LOG IN',
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : const Text(
+                        'LOG IN',
+                        style: TextStyle(color: Colors.white),
+                      ),
               ),
             ),
             const SizedBox(height: 20),
@@ -192,7 +221,7 @@ class _loginpageState extends State<loginpage> {
 
     if (user != null) {
       print('User is Successfully Created');
-      Navigator.push(
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const Homepage(),

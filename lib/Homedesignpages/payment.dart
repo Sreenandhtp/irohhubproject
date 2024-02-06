@@ -14,6 +14,7 @@ class Paymentpage extends StatefulWidget {
 class _PaymentpageState extends State<Paymentpage> {
   var size, height, width;
   selected selectedValue = selected.first;
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -111,7 +112,7 @@ class _PaymentpageState extends State<Paymentpage> {
                           style: TextStyle(fontSize: 17),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 30),
+                          padding: const EdgeInsets.only(left: 60),
                           child: Container(
                             height: 20,
                             width: 40,
@@ -274,19 +275,28 @@ class _PaymentpageState extends State<Paymentpage> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.redAccent),
                         onPressed: () {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          Future.delayed(const Duration(seconds: 5));
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const Successpage()));
+                                  
                         },
-                        child: Text(
-                          'COMPLETE THE ORDER',
-                          style: GoogleFonts.mPlus1(
-                              textStyle: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16)),
-                        ),
+                        child: isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                'COMPLETE THE ORDER',
+                                style: GoogleFonts.mPlus1(
+                                    textStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
+                              ),
                       ),
                     )),
               ],

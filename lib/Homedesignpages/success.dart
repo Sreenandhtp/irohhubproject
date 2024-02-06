@@ -9,20 +9,45 @@ class Successpage extends StatefulWidget {
 }
 
 class _SuccesspageState extends State<Successpage> {
+  bool isLoading = false;
   @override
+  void initState() {
+    isLoading = true;
+    Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Center(
-          child: Image.asset('asset/tik.png'),
-        ),
-        Text(
-          'Payment Successful',
-          style: GoogleFonts.mPlus1(
-              textStyle:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-        ),
+        isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  strokeWidth: 100,
+                  color: Colors.redAccent,
+                ),
+              )
+            : Column(
+                children: [
+                  Center(
+                    child: Image.asset('asset/tik.png'),
+                  ),
+                  Text(
+                    'Payment Successful',
+                    style: GoogleFonts.mPlus1(
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                  ),
+                ],
+              ),
+
         const SizedBox(
           height: 80,
         ),

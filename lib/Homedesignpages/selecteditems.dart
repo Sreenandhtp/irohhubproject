@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/Homedesignpages/addresspage.dart';
 import 'package:irohubproject/Homedesignpages/mycart.dart';
 
 class Selecteditempage extends StatefulWidget {
-  const Selecteditempage({super.key});
+  final selelctedAllitems;
+  const Selecteditempage({super.key, this.selelctedAllitems});
 
   @override
   State<Selecteditempage> createState() => _SelecteditempageState();
 }
 
 class _SelecteditempageState extends State<Selecteditempage> {
-  var size, height, width;
+  bool isTap = false;
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -91,39 +93,32 @@ class _SelecteditempageState extends State<Selecteditempage> {
                   SizedBox(
                     height: 250,
                     width: double.infinity,
-                    child: Image.asset(
-                      'asset/selectedbag.jpg',
+                    child: Image.network(
+                      widget.selelctedAllitems['image'],
                       fit: BoxFit.cover,
                     ),
                   ),
                   Positioned(
-                      left: 350,
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.favorite_border_sharp,
-                            size: 30,
-                          )))
+                      right: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isTap = !isTap;
+                          });
+                        },
+                        child: isTap
+                            ? const Icon(
+                                Icons.favorite_border_sharp,
+                                size: 30,
+                              )
+                            : const Icon(
+                                Icons.favorite,
+                                size: 30,
+                                color: Colors.red,
+                              ),
+                      ))
                 ]),
               ),
-              // Positioned(
-              //     child: Column(
-              //   children: [
-              //     Container(
-              //       decoration: const BoxDecoration(
-              //         shape: BoxShape.circle,
-              //         color: Colors.white,
-              //       ),
-              //     ),
-              //     Container(
-              //       decoration: const BoxDecoration(
-              //         shape: BoxShape.circle,
-              //         color: Colors.red,
-              //       ),
-              //     )
-              //   ],
-              // )),
-
               Container(
                 height: size.height / 2,
                 width: size.width,
@@ -141,52 +136,64 @@ class _SelecteditempageState extends State<Selecteditempage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Nike Air Max',
+                          widget.selelctedAllitems["name"],
                           style: GoogleFonts.mPlus1(
                               textStyle: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 22)),
                         ),
-                        const Row(
+                        Row(
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.attach_money_outlined, size: 22),
+                                const Icon(Icons.attach_money_outlined,
+                                    size: 22),
                                 Text(
-                                  '250.00',
-                                  style: TextStyle(
+                                  widget.selelctedAllitems["price"],
+                                  style: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                     const SizedBox(height: 6),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: RatingBar.builder(
+                        initialRating: 3,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        // itemPadding:
+                        //     const EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) => const Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                        ),
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 15),
                     Row(
                       children: [
-                        SizedBox(
-                            height: 25,
-                            width: 25,
-                            child: Image.asset('asset/star.png')),
-                        SizedBox(
-                            height: 25,
-                            width: 25,
-                            child: Image.asset('asset/star.png')),
-                        SizedBox(
-                            height: 25,
-                            width: 25,
-                            child: Image.asset('asset/star.png')),
-                        SizedBox(
-                            height: 25,
-                            width: 25,
-                            child: Image.asset('asset/star.png')),
-                        const SizedBox(
-                            height: 25,
-                            width: 25,
-                            child: Icon(Icons.star_border_outlined)),
-                        const Text('(108)')
+                        Text("Qty :",
+                            style: GoogleFonts.mPlus1(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18))),
+                        Text("1",
+                            style: GoogleFonts.mPlus1(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18)))
                       ],
                     ),
                     const SizedBox(
@@ -202,14 +209,14 @@ class _SelecteditempageState extends State<Selecteditempage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(6.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: Text(
                         'Let him understand these little things. My eternal salvation is anticipatory, for he does not receive it. And these little elites must understand the antiope to receive',
                         style: GoogleFonts.mPlus1(
-                            textStyle: const TextStyle(fontSize: 18)),
+                            textStyle: const TextStyle(fontSize: 15)),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 60),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

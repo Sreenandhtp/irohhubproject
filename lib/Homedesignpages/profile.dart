@@ -8,6 +8,7 @@ import 'package:irohubproject/Homedesignpages/myprofile.dart';
 import 'package:irohubproject/controller/authcontroller.dart';
 import 'package:irohubproject/loginpage.dart';
 import 'package:irohubproject/widgets/profilefield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -85,13 +86,12 @@ class _ProfilepageState extends State<Profilepage> {
             Profilefields(
               profilefieldtext: 'Logout',
               iconData: Icons.logout,
-              buttonAction: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const loginpage(),
-                    ));
+              buttonAction: () async {
+                final SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                sharedPreferences.remove('email');
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const loginpage()));
               },
             )
           ],

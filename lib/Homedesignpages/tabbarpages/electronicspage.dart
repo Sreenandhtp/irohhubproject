@@ -54,7 +54,7 @@ class _ElectronicspageState extends State<Electronicspage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Selecteditempage(),
+                        builder: (context) =>  Selecteditempage(),
                       ));
                 },
                 child: Container(
