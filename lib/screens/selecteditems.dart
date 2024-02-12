@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/addresspage.dart';
-import 'package:irohubproject/Homedesignpages/mycart.dart';
+import 'package:irohubproject/screens/addresspage.dart';
+
+import 'package:irohubproject/modelclass/userRepository.dart';
 
 class Selecteditempage extends StatefulWidget {
   final selelctedAllitems;
@@ -13,6 +14,8 @@ class Selecteditempage extends StatefulWidget {
 }
 
 class _SelecteditempageState extends State<Selecteditempage> {
+  final cartcontroller = UserRepository();
+  final wishescontroller = UserRepository1();
   bool isTap = false;
   @override
   Widget build(BuildContext context) {
@@ -101,22 +104,26 @@ class _SelecteditempageState extends State<Selecteditempage> {
                   Positioned(
                       right: 20,
                       child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isTap = !isTap;
-                          });
-                        },
-                        child: isTap
-                            ? const Icon(
-                                Icons.favorite_border_sharp,
-                                size: 30,
-                              )
-                            : const Icon(
-                                Icons.favorite,
-                                size: 30,
-                                color: Colors.red,
-                              ),
-                      ))
+                          onTap: () {
+                            setState(() {
+                              isTap = !isTap;
+                              wishescontroller.savewishesItems(
+                                  widget.selelctedAllitems["name"],
+                                  widget.selelctedAllitems["image"],
+                                  widget.selelctedAllitems["price"],
+                                  context);
+                            });
+                          },
+                          child: isTap
+                              ? const Icon(
+                                  Icons.favorite,
+                                  size: 30,
+                                  color: Colors.red,
+                                )
+                              : const Icon(
+                                  Icons.favorite_border_sharp,
+                                  size: 30,
+                                )))
                 ]),
               ),
               Container(
@@ -163,6 +170,7 @@ class _SelecteditempageState extends State<Selecteditempage> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: RatingBar.builder(
+                        itemSize: 25,
                         initialRating: 3,
                         minRating: 1,
                         direction: Axis.horizontal,
@@ -171,10 +179,10 @@ class _SelecteditempageState extends State<Selecteditempage> {
                         // itemPadding:
                         //     const EdgeInsets.symmetric(horizontal: 4.0),
                         itemBuilder: (context, _) => const Padding(
-                          padding: EdgeInsets.all(5.0),
+                          padding: EdgeInsets.all(4.0),
                           child: Icon(
                             Icons.star,
-                            color: Colors.amber,
+                            color: Color.fromARGB(255, 250, 189, 5),
                           ),
                         ),
                         onRatingUpdate: (rating) {
@@ -209,14 +217,14 @@ class _SelecteditempageState extends State<Selecteditempage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(
                         'Let him understand these little things. My eternal salvation is anticipatory, for he does not receive it. And these little elites must understand the antiope to receive',
                         style: GoogleFonts.mPlus1(
                             textStyle: const TextStyle(fontSize: 15)),
                       ),
                     ),
-                    const SizedBox(height: 60),
+                    const SizedBox(height: 45),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -229,11 +237,11 @@ class _SelecteditempageState extends State<Selecteditempage> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Mycart(),
-                                  ));
+                              cartcontroller.saveCartItems(
+                                  widget.selelctedAllitems["name"],
+                                  widget.selelctedAllitems["image"],
+                                  widget.selelctedAllitems["price"],
+                                  context);
                             },
                             child: Text(
                               'ADD TO CART',

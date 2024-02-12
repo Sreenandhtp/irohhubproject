@@ -8,8 +8,8 @@ class FirebaseAuthService {
     try {
       UserCredential credential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       return credential.user;
-      
     } catch (e) {
       print('Some Error Occured');
     }
@@ -27,4 +27,6 @@ class FirebaseAuthService {
     }
     return null;
   }
+
+  static void signInwithGoogle() {}
 }

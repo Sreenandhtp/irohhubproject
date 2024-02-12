@@ -1,48 +1,48 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/selecteditems.dart';
+import 'package:irohubproject/screens/selecteditems.dart';
+import 'package:irohubproject/modelclass/userRepository.dart';
 
-class bagspage extends StatefulWidget {
-  const bagspage({super.key});
+class Shoespage extends StatefulWidget {
+  const Shoespage({super.key});
 
   @override
-  State<bagspage> createState() => _bagspageState();
+  State<Shoespage> createState() => _ShoespageState();
 }
 
-class _bagspageState extends State<bagspage> {
-  var bagitems = [];
-  getBagData() async {
+class _ShoespageState extends State<Shoespage> {
+  final controller = UserRepository();
+  var shoesitems = [];
+  getshoeData() async {
     var res = await FirebaseFirestore.instance
-        .collection("bagproducts")
-        .doc("bagimages")
+        .collection("shoeproducts")
+        .doc("shoeimages")
         .get();
 
-    bagitems.addAll(res.data()?["bagitems"]);
-    log("-------------- $bagitems");
+    shoesitems.addAll(res.data()?["shoesitems"]);
+    log("-------------- $shoesitems");
   }
-
-  bool isclicked = false;
 
   @override
   void initState() {
     super.initState();
-    getBagData();
+    getshoeData();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: FutureBuilder(
-          future: getBagData(),
+          future: getshoeData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: GridView.builder(
-                    itemCount: bagitems.length,
+                    itemCount: shoesitems.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: 220,
@@ -57,7 +57,8 @@ class _bagspageState extends State<bagspage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Selecteditempage(
-                                    selelctedAllitems: bagitems[index]),
+                                  selelctedAllitems: shoesitems[index],
+                                ),
                               ));
                         },
                         child: Container(
@@ -83,40 +84,11 @@ class _bagspageState extends State<bagspage> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(6),
                                         child: Image.network(
-                                          bagitems[index]["image"],
+                                          shoesitems[index]["image"],
                                           fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
-                                    Positioned(
-                                        left: 109,
-                                        child: Container(
-                                            height: 34,
-                                            width: 34,
-                                            decoration: const BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 240, 238, 238),
-                                                shape: BoxShape.circle),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  isclicked = !isclicked;
-                                                });
-                                              },
-                                              child: isclicked
-                                                  ? const Icon(
-                                                      Icons
-                                                          .favorite_border_sharp,
-                                                      size: 20,
-                                                      color: Color.fromARGB(
-                                                          255, 104, 103, 103),
-                                                    )
-                                                  : const Icon(
-                                                      Icons.favorite,
-                                                      size: 20,
-                                                      color: Colors.red,
-                                                    ),
-                                            )))
                                   ],
                                 ),
                               ),
@@ -126,12 +98,26 @@ class _bagspageState extends State<bagspage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      bagitems[index]["name"],
-                                      style: GoogleFonts.mPlus1(
-                                          textStyle: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16)),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          shoesitems[index]["name"],
+                                          style: GoogleFonts.mPlus1(
+                                              textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          )),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          "50%",
+                                          style: GoogleFonts.mPlus1(
+                                              textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color:
+                                                Color.fromARGB(255, 33, 77, 35),
+                                          )),
+                                        ),
+                                      ],
                                     ),
                                     Container(
                                       height: 28,
@@ -141,7 +127,13 @@ class _bagspageState extends State<bagspage> {
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            controller.saveCartItems(
+                                                shoesitems[index]["name"],
+                                                shoesitems[index]["image"],
+                                                shoesitems[index]["price"],
+                                                context);
+                                          },
                                           icon: const Icon(
                                             Icons.card_travel_sharp,
                                             color: Colors.white,
@@ -156,9 +148,8 @@ class _bagspageState extends State<bagspage> {
                                   const Icon(Icons.attach_money_outlined,
                                       size: 18),
                                   Text(
-                                    bagitems[index]["price"],
+                                    shoesitems[index]["price"],
                                     style: const TextStyle(
-                                        fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -170,7 +161,9 @@ class _bagspageState extends State<bagspage> {
                     }),
               );
             }
-            return const SizedBox();
+            return const Center(
+              child: CircularProgressIndicator(color: Colors.redAccent),
+            );
           }),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/success.dart';
+import 'package:irohubproject/screens/success.dart';
 
 enum selected { first, second }
 
@@ -70,7 +70,6 @@ class _PaymentpageState extends State<Paymentpage> {
                               'Pay',
                               style: TextStyle(
                                   color: Color.fromARGB(255, 13, 75, 126),
-                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic),
                             ),
@@ -78,7 +77,6 @@ class _PaymentpageState extends State<Paymentpage> {
                               'Pal',
                               style: TextStyle(
                                   color: Color.fromARGB(255, 92, 174, 241),
-                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic),
                             ),
@@ -109,7 +107,6 @@ class _PaymentpageState extends State<Paymentpage> {
                         ),
                         const Text(
                           'Use credit Card/Debit Card',
-                          style: TextStyle(fontSize: 17),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 60),
@@ -136,7 +133,7 @@ class _PaymentpageState extends State<Paymentpage> {
                       'Card Number',
                       style: GoogleFonts.mPlus1(
                           textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                   ),
                 ),
@@ -155,8 +152,8 @@ class _PaymentpageState extends State<Paymentpage> {
                         decoration:
                             const InputDecoration(border: InputBorder.none),
                         style: GoogleFonts.mPlus1(
-                            textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
+                            textStyle:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ),
@@ -171,7 +168,7 @@ class _PaymentpageState extends State<Paymentpage> {
                           'Date',
                           style: GoogleFonts.mPlus1(
                               textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18)),
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ),
                       const SizedBox(width: 170),
@@ -179,7 +176,7 @@ class _PaymentpageState extends State<Paymentpage> {
                         'cvv',
                         style: GoogleFonts.mPlus1(
                             textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
+                                fontWeight: FontWeight.bold, fontSize: 16)),
                       ),
                     ],
                   ),
@@ -203,7 +200,7 @@ class _PaymentpageState extends State<Paymentpage> {
                                 border: InputBorder.none),
                             style: GoogleFonts.mPlus1(
                                 textStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18)),
+                                    fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ),
@@ -222,8 +219,8 @@ class _PaymentpageState extends State<Paymentpage> {
                           decoration: const InputDecoration(
                               hintText: 'XXX', border: InputBorder.none),
                           style: GoogleFonts.mPlus1(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18)),
+                              textStyle:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ),
@@ -256,7 +253,7 @@ class _PaymentpageState extends State<Paymentpage> {
                             'Add Another Methods',
                             style: GoogleFonts.mPlus1(
                                 textStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16)),
+                                    fontWeight: FontWeight.bold)),
                           )
                         ],
                       )),
@@ -283,7 +280,6 @@ class _PaymentpageState extends State<Paymentpage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const Successpage()));
-                                  
                         },
                         child: isLoading
                             ? const CircularProgressIndicator(

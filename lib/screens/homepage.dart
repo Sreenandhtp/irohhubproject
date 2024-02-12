@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:irohubproject/Homedesignpages/cart.dart';
-import 'package:irohubproject/Homedesignpages/home.dart';
+import 'package:irohubproject/screens/cart.dart';
+import 'package:irohubproject/screens/home.dart';
+import 'package:irohubproject/screens/mycart.dart';
 
-import 'package:irohubproject/Homedesignpages/profile.dart';
-import 'package:irohubproject/Homedesignpages/wishespage.dart';
+import 'package:irohubproject/screens/profile.dart';
+import 'package:irohubproject/screens/wishespage.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -18,7 +19,7 @@ class _HomepageState extends State<Homepage> {
   List<Widget> tabwidgets = [
     const Home(),
     const Wishespage(),
-    const CartPage(),
+    const Mycart(),
     const Profilepage()
   ];
   int indexnum = 0;

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/filter.dart';
-import 'package:irohubproject/Homedesignpages/profile.dart';
-import 'package:irohubproject/Homedesignpages/tabbarpages/allitems.dart';
-import 'package:irohubproject/Homedesignpages/tabbarpages/bagspage.dart';
-import 'package:irohubproject/Homedesignpages/tabbarpages/electronicspage.dart';
-import 'package:irohubproject/Homedesignpages/tabbarpages/shoespage.dart';
-import 'package:irohubproject/Homedesignpages/tabbarpages/skincare.dart';
-import 'package:irohubproject/Homedesignpages/trackingorder.dart';
-import 'package:irohubproject/flashscreen.dart';
 import 'package:irohubproject/map/currentlocation.dart';
+import 'package:irohubproject/screens/filter.dart';
+import 'package:irohubproject/screens/mycart.dart';
+
+import 'package:irohubproject/screens/profile.dart';
+import 'package:irohubproject/tabbar_pages/allitems.dart';
+import 'package:irohubproject/tabbar_pages/bagspage.dart';
+import 'package:irohubproject/tabbar_pages/electronicspage.dart';
+import 'package:irohubproject/tabbar_pages/shoespage.dart';
+import 'package:irohubproject/tabbar_pages/skincare.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -39,17 +39,17 @@ class _HomepageState extends State<Home> {
                       ));
                 },
                 child: const CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage('asset/IMG_9486.jpg'),
-                ),
+                    radius: 30,
+                    backgroundImage: NetworkImage(
+                        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')),
               ),
             ),
             title: Text(
-              'Hi,$finalemail',
+              'Shoppeee',
               style: GoogleFonts.kanit(
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black),
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 182, 32, 32)),
             ),
             actions: [
               IconButton(
@@ -57,7 +57,20 @@ class _HomepageState extends State<Home> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Trackingorder(),
+                          builder: (context) => MapSample(),
+                        ));
+                  },
+                  icon: const Icon(
+                    Icons.location_on,
+                    color: Colors.black,
+                    size: 25,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Mycart(),
                         ));
                   },
                   icon: const Icon(
@@ -136,7 +149,7 @@ class _HomepageState extends State<Home> {
                       text: 'Skincares',
                     ),
                   ]),
-              Expanded(
+              const Expanded(
                 child: TabBarView(children: [
                   Allitems(),
                   Shoespage(),

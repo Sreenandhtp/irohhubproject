@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/selecteditems.dart';
+import 'package:irohubproject/screens/selecteditems.dart';
 
 class Skincarepage extends StatefulWidget {
   const Skincarepage({super.key});

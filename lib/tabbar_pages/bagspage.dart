@@ -1,45 +1,48 @@
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/selecteditems.dart';
+import 'package:irohubproject/screens/selecteditems.dart';
+import 'package:irohubproject/modelclass/userRepository.dart';
 
-class Shoespage extends StatefulWidget {
-  const Shoespage({super.key});
+class bagspage extends StatefulWidget {
+  const bagspage({super.key});
 
   @override
-  State<Shoespage> createState() => _ShoespageState();
+  State<bagspage> createState() => _bagspageState();
 }
 
-class _ShoespageState extends State<Shoespage> {
-  var shoesitems = [];
-  getshoeData() async {
+class _bagspageState extends State<bagspage> {
+  final controller = UserRepository();
+  var bagitems = [];
+  getBagData() async {
     var res = await FirebaseFirestore.instance
-        .collection("shoeproducts")
-        .doc("shoeimages")
+        .collection("bagproducts")
+        .doc("bagimages")
         .get();
 
-    shoesitems.addAll(res.data()?["shoesitems"]);
-    log("-------------- $shoesitems");
+    bagitems.addAll(res.data()?["bagitems"]);
+    log("-------------- $bagitems");
   }
 
   @override
   void initState() {
     super.initState();
-    getshoeData();
+    getBagData();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: FutureBuilder(
-          future: getshoeData(),
+          future: getBagData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: GridView.builder(
-                    itemCount: shoesitems.length,
+                    itemCount: bagitems.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: 220,
@@ -54,7 +57,7 @@ class _ShoespageState extends State<Shoespage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Selecteditempage(
-                                  selelctedAllitems: shoesitems[index],
+                                  selelctedAllitems: bagitems[index],
                                 ),
                               ));
                         },
@@ -81,29 +84,11 @@ class _ShoespageState extends State<Shoespage> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(6),
                                         child: Image.network(
-                                          shoesitems[index]["image"],
+                                          bagitems[index]["image"],
                                           fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
-                                    Positioned(
-                                        left: 109,
-                                        child: Container(
-                                          height: 34,
-                                          width: 34,
-                                          decoration: const BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 240, 238, 238),
-                                              shape: BoxShape.circle),
-                                          child: IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                Icons.favorite_border_sharp,
-                                                size: 20,
-                                                color: Color.fromARGB(
-                                                    255, 104, 103, 103),
-                                              )),
-                                        ))
                                   ],
                                 ),
                               ),
@@ -113,12 +98,26 @@ class _ShoespageState extends State<Shoespage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      shoesitems[index]["name"],
-                                      style: GoogleFonts.mPlus1(
-                                          textStyle: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16)),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          bagitems[index]["name"],
+                                          style: GoogleFonts.mPlus1(
+                                              textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          )),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          "25%",
+                                          style: GoogleFonts.mPlus1(
+                                              textStyle: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color:
+                                                Color.fromARGB(255, 33, 77, 35),
+                                          )),
+                                        ),
+                                      ],
                                     ),
                                     Container(
                                       height: 28,
@@ -128,7 +127,13 @@ class _ShoespageState extends State<Shoespage> {
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            controller.saveCartItems(
+                                                bagitems[index]["name"],
+                                                bagitems[index]["image"],
+                                                bagitems[index]["price"],
+                                                context);
+                                          },
                                           icon: const Icon(
                                             Icons.card_travel_sharp,
                                             color: Colors.white,
@@ -143,9 +148,8 @@ class _ShoespageState extends State<Shoespage> {
                                   const Icon(Icons.attach_money_outlined,
                                       size: 18),
                                   Text(
-                                    shoesitems[index]["price"],
+                                    bagitems[index]["price"],
                                     style: const TextStyle(
-                                        fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -157,7 +161,9 @@ class _ShoespageState extends State<Shoespage> {
                     }),
               );
             }
-            return const SizedBox();
+            return const Center(
+              child: CircularProgressIndicator(color: Colors.redAccent),
+            );
           }),
     );
   }

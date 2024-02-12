@@ -1,14 +1,17 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:irohubproject/Homedesignpages/home.dart';
-import 'package:irohubproject/controller/authcontroller.dart';
-import 'package:irohubproject/forgottpassword.dart';
+import 'package:irohubproject/screens/home.dart';
+import 'package:irohubproject/authentication/authcontroller.dart';
+import 'package:irohubproject/authentication/googleauth/googlelogin.dart';
+import 'package:irohubproject/screens/forgottpassword.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:irohubproject/homepage.dart';
-import 'package:irohubproject/signinpage.dart';
-import 'package:irohubproject/verification.dart';
+import 'package:irohubproject/screens/homepage.dart';
+import 'package:irohubproject/login_and_signin/signinpage.dart';
+import 'package:irohubproject/variables/sharedpref.dart';
 import 'package:irohubproject/widgets/textfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -135,18 +138,12 @@ class _loginpageState extends State<loginpage> {
                   final SharedPreferences sharedPreferences =
                       await SharedPreferences.getInstance();
                   sharedPreferences.setString('email', emailcontroller.text);
-                  Login();
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const Homepage(),
-                  //     ));
+                  login();
 
                   setState(() {
                     isLoading = true;
                   });
                   Future.delayed(const Duration(seconds: 3));
-                  // Login();
                 },
                 style:
                     ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
@@ -176,7 +173,10 @@ class _loginpageState extends State<loginpage> {
                   ),
                   IconButton(
                       icon: const FaIcon(FontAwesomeIcons.google),
-                      onPressed: () {}),
+                      onPressed: () {
+                        
+                        FirebaseServiece.signInwithGoogle(context);
+                      }),
                   const SizedBox(
                     width: 25,
                   ),
@@ -213,21 +213,32 @@ class _loginpageState extends State<loginpage> {
     );
   }
 
-  void Login() async {
+  void login() async {
     String email = emailcontroller.text;
     String password = passwordcontroller.text;
 
-    User? user = await auth.signInWithEmailAndPassword(email, password);
+    final userCredential =
+        await auth.signInWithEmailAndPassword(email, password);
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setString(
+      'id',
+      userCredential!.uid,
+    );
+    shareprefvalue = userCredential.uid;
+    print("############$shareprefvalue");
 
-    if (user != null) {
-      print('User is Successfully Created');
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Homepage(),
-          ));
-    } else {
-      print('Some error happend');
-    }
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homepage(),
+        ));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text(
+        "User Logged in Successfully...",
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.redAccent,
+    ));
   }
 }

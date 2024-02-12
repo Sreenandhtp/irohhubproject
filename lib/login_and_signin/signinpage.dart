@@ -1,11 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:irohubproject/controller/authcontroller.dart';
-import 'package:irohubproject/loginpage.dart';
-
+import 'package:irohubproject/authentication/authcontroller.dart';
+import 'package:irohubproject/login_and_signin/loginpage.dart';
+import 'package:irohubproject/variables/sharedpref.dart';
 import 'package:irohubproject/widgets/textfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Signinpage extends StatefulWidget {
   const Signinpage({super.key});
@@ -129,7 +130,7 @@ class _SigninpageState extends State<Signinpage> {
               width: 330,
               child: ElevatedButton(
                 onPressed: () {
-                  signin();
+                  signUp();
                 },
                 style:
                     ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
@@ -172,20 +173,55 @@ class _SigninpageState extends State<Signinpage> {
     );
   }
 
-  void signin() async {
+  void signUp() async {
     String username = usenamecontroller.text;
     String email = emailcontroller.text;
     String password = passwordcontroller.text;
 
-    User? user = await auth.signUpWithEmailAndPassword(email, password);
+    final userCredential =
+        await auth.signUpWithEmailAndPassword(email, password);
+    Map<String, dynamic> toJson() {
+      return {
+        "username": username,
+        "email": email,
+        "password": password,
+        "id": userCredential!.uid
+      };
+    }
 
-    if (user != null) {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setString(
+      'id',
+      userCredential!.uid,
+    );
+    shareprefvalue = userCredential.uid;
+    print("############$shareprefvalue");
+
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    try {
+      await db.collection("users").doc(userCredential.uid).set(toJson());
+    } catch (e) {
+      print("Some error occure $e");
+    }
+
+    if (userCredential.uid.isNotEmpty) {
+      print(userCredential.uid);
       print('User is Successfully Created');
+      // ignore: use_build_context_synchronously
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => loginpage(),
+            builder: (context) => const loginpage(),
           ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "Sign up Successfully.....,",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.redAccent,
+      ));
     } else {
       print('Some error happend');
     }

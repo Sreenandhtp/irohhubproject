@@ -3,8 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/seeall1.dart';
-import 'package:irohubproject/Homedesignpages/selecteditems.dart';
+import 'package:irohubproject/screens/seeall1.dart';
+import 'package:irohubproject/screens/selecteditems.dart';
+import 'package:irohubproject/modelclass/userRepository.dart';
 
 class Allitems extends StatefulWidget {
   const Allitems({super.key});
@@ -14,9 +15,10 @@ class Allitems extends StatefulWidget {
 }
 
 class _AllitemsState extends State<Allitems> {
- 
+  final controller = UserRepository();
   var allitems = [];
-  
+  var newarraivals = [];
+
   getData() async {
     var res = await FirebaseFirestore.instance
         .collection("products")
@@ -25,11 +27,21 @@ class _AllitemsState extends State<Allitems> {
 
     allitems.addAll(res.data()?["items"]);
     log("-------------- $allitems");
+  }
 
+  getnewData() async {
+    var res = await FirebaseFirestore.instance
+        .collection("newarraivals")
+        .doc("newarraivalimages")
+        .get();
+
+    newarraivals.addAll(res.data()?["newarraivalitems"]);
+    log("-------------- $newarraivals");
     @override
     void initState() {
       super.initState();
       getData();
+      getnewData();
     }
   }
 
@@ -197,7 +209,7 @@ class _AllitemsState extends State<Allitems> {
                   'Popular',
                   style: GoogleFonts.mPlus1(
                       textStyle: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20)),
+                          fontWeight: FontWeight.bold, fontSize: 17)),
                 ),
               ),
               Padding(
@@ -212,7 +224,7 @@ class _AllitemsState extends State<Allitems> {
                     },
                     child: const Text(
                       'See All',
-                      style: TextStyle(color: Colors.redAccent, fontSize: 15),
+                      style: TextStyle(color: Colors.redAccent, fontSize: 13),
                     )),
               )
             ],
@@ -236,16 +248,14 @@ class _AllitemsState extends State<Allitems> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Selecteditempage(),
+                                      builder: (context) =>
+                                          const Selecteditempage(),
                                     ));
                               },
                               child: Container(
                                 height: 280,
                                 width: 200,
                                 decoration: BoxDecoration(
-                                    // boxShadow: const [
-                                    //   BoxShadow(blurRadius: 5, offset: Offset(1, 0))
-                                    // ],
                                     color: Colors.white,
                                     borderRadius:
                                         BorderRadiusDirectional.circular(10)),
@@ -294,8 +304,8 @@ class _AllitemsState extends State<Allitems> {
                                       allitems[index]["name"],
                                       style: GoogleFonts.mPlus1(
                                           textStyle: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16)),
+                                        fontWeight: FontWeight.bold,
+                                      )),
                                     ),
                                     const SizedBox(width: 50),
                                     Padding(
@@ -308,7 +318,13 @@ class _AllitemsState extends State<Allitems> {
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         child: IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.saveCartItems(
+                                                  allitems[index]["name"],
+                                                  allitems[index]["image"],
+                                                  allitems[index]["price"],
+                                                  context);
+                                            },
                                             icon: const Icon(
                                               Icons.card_travel_sharp,
                                               color: Colors.white,
@@ -324,11 +340,10 @@ class _AllitemsState extends State<Allitems> {
                                 child: Row(
                                   children: [
                                     const Icon(Icons.attach_money_outlined,
-                                        size: 20),
+                                        size: 15),
                                     Text(
                                       allitems[index]["price"],
                                       style: const TextStyle(
-                                          fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     )
                                   ],
@@ -350,7 +365,7 @@ class _AllitemsState extends State<Allitems> {
                   'New Arrival',
                   style: GoogleFonts.mPlus1(
                       textStyle: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20)),
+                          fontWeight: FontWeight.bold, fontSize: 17)),
                 ),
               ),
               Padding(
@@ -360,125 +375,146 @@ class _AllitemsState extends State<Allitems> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => seeall1(),
+                            builder: (context) => const seeall1(),
                           ));
                     },
                     child: const Text(
                       'See All',
-                      style: TextStyle(color: Colors.redAccent, fontSize: 15),
+                      style: TextStyle(color: Colors.redAccent, fontSize: 13),
                     )),
               )
             ],
           ),
-          LimitedBox(
-            maxHeight: 140,
-            child: ListView.builder(
-                itemCount: 6,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Stack(children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Selecteditempage(),
-                              ));
-                        },
-                        child: Container(
-                          width: 280,
-                          height: 140,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 245, 245, 245),
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                      Positioned(
-                          child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Selecteditempage(),
-                                ));
-                          },
-                          child: Container(
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 235, 234, 234),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset(
-                                'asset/bag1.jpg',
-                                fit: BoxFit.cover,
+          FutureBuilder(
+              future: getnewData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return LimitedBox(
+                    maxHeight: 140,
+                    child: ListView.builder(
+                        itemCount: newarraivals.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Stack(children: [
+                              InkWell(
+                                onTap: () {
+                                  getnewData();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Selecteditempage(
+                                          selelctedAllitems:
+                                              newarraivals[index],
+                                        ),
+                                      ));
+                                },
+                                child: Container(
+                                  width: 280,
+                                  height: 140,
+                                  decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 245, 245, 245),
+                                      borderRadius: BorderRadius.circular(10)),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      )),
-                      Positioned(
-                          left: 130,
-                          top: 10,
-                          child: Column(
-                            children: [
-                              Text(
-                                'Chanel Bag',
-                                style: GoogleFonts.mPlus1(
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16)),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                '''Lorem ipsum is best always
-sum is best always''',
-                                style: GoogleFonts.mPlus1(
-                                    textStyle: const TextStyle(fontSize: 10)),
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  const Row(
+                              Positioned(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    getnewData();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              Selecteditempage(
+                                            selelctedAllitems:
+                                                newarraivals[index],
+                                          ),
+                                        ));
+                                  },
+                                  child: Container(
+                                    height: 100,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 235, 234, 234),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        newarraivals[index]['image'],
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )),
+                              Positioned(
+                                  left: 130,
+                                  top: 10,
+                                  child: Column(
                                     children: [
-                                      Icon(Icons.attach_money_outlined,
-                                          size: 15),
                                       Text(
-                                        '50.00',
-                                        style: TextStyle(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.bold),
+                                        newarraivals[index]['name'],
+                                        style: GoogleFonts.mPlus1(
+                                            textStyle: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        '''Lorem ipsum is best always
+              sum is best always''',
+                                        style: GoogleFonts.mPlus1(fontSize: 10),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                  Icons.attach_money_outlined,
+                                                  size: 15),
+                                              Text(
+                                                newarraivals[index]['price'],
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                          const SizedBox(width: 40),
+                                          Container(
+                                            height: 28,
+                                            width: 28,
+                                            decoration: BoxDecoration(
+                                                color: Colors.redAccent,
+                                                borderRadius:
+                                                    BorderRadius.circular(6)),
+                                            child: IconButton(
+                                                onPressed: () {},
+                                                icon: const Icon(
+                                                  Icons.card_travel,
+                                                  color: Colors.white,
+                                                  size: 15,
+                                                )),
+                                          ),
+                                        ],
                                       )
                                     ],
-                                  ),
-                                  const SizedBox(width: 60),
-                                  Container(
-                                    height: 28,
-                                    width: 28,
-                                    decoration: BoxDecoration(
-                                        color: Colors.redAccent,
-                                        borderRadius: BorderRadius.circular(6)),
-                                    child: IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.card_travel,
-                                          color: Colors.white,
-                                          size: 15,
-                                        )),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ))
-                    ]),
+                                  ))
+                            ]),
+                          );
+                        }),
                   );
-                }),
-          )
+                }
+                return const Center(
+                  child: CircularProgressIndicator(color: Colors.redAccent),
+                );
+              })
         ],
       ),
     );

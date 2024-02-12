@@ -12,6 +12,8 @@ class Myprofile extends StatefulWidget {
 }
 
 class _MyprofileState extends State<Myprofile> {
+  // User? user = FirebaseAuth.instance.currentUser;
+
   String image = "";
   File? _image;
   String image1 = "";
@@ -53,7 +55,7 @@ class _MyprofileState extends State<Myprofile> {
           icon: const Icon(Icons.arrow_back_ios_outlined, size: 18),
         ),
         title: Text(
-          "MY PROFILE",
+          "My Profile",
           style: GoogleFonts.mPlus1(
               textStyle:
                   const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
@@ -190,14 +192,18 @@ class _MyprofileState extends State<Myprofile> {
                           radius: 60,
                           backgroundImage: FileImage(_image!),
                         )
-                      : const CircleAvatar(
+                      : CircleAvatar(
                           radius: 60,
                           backgroundImage: NetworkImage(
-                              "https://i.pinimg.com/564x/39/94/fb/3994fb52d1f983d003ed6f084366bdab.jpg"),
+                              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"),
                         ),
                 ),
               ),
-              TextButton(onPressed: () {}, child: const Text('edit')),
+              TextButton(
+                  onPressed: () {
+                    getimage();
+                  },
+                  child: const Text('edit')),
               Container(
                 height: 60,
                 width: double.infinity,

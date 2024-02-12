@@ -18,7 +18,9 @@ class _PasswordchangeState extends State<Passwordchange> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back,
               size: 25,

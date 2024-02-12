@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/Homedesignpages/payment.dart';
+import 'package:irohubproject/screens/payment.dart';
 
 class Addresspage extends StatefulWidget {
   const Addresspage({super.key});
@@ -68,7 +68,7 @@ class _AddresspageState extends State<Addresspage> {
                       'Enter Your District',
                       style: GoogleFonts.mPlus1(
                           textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                   ),
                 ),
@@ -85,8 +85,8 @@ class _AddresspageState extends State<Addresspage> {
                         hint: Text(
                           '  Select District',
                           style: GoogleFonts.mPlus1(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18)),
+                              textStyle:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         elevation: 0,
                         borderRadius: BorderRadius.circular(10),
@@ -99,8 +99,8 @@ class _AddresspageState extends State<Addresspage> {
                                     country,
                                     style: GoogleFonts.mPlus1(
                                         textStyle: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18)),
+                                      fontWeight: FontWeight.bold,
+                                    )),
                                   )));
                         }).toList(),
                         onChanged: (String? newvalue) {
@@ -118,7 +118,7 @@ class _AddresspageState extends State<Addresspage> {
                       'Fullname',
                       style: GoogleFonts.mPlus1(
                           textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                   ),
                 ),
@@ -136,8 +136,8 @@ class _AddresspageState extends State<Addresspage> {
                         decoration:
                             const InputDecoration(border: InputBorder.none),
                         style: GoogleFonts.mPlus1(
-                            textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
+                            textStyle:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ),
@@ -153,14 +153,14 @@ class _AddresspageState extends State<Addresspage> {
                           'City',
                           style: GoogleFonts.mPlus1(
                               textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18)),
+                                  fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
                       ),
                       Text(
                         'Pincode',
                         style: GoogleFonts.mPlus1(
                             textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
+                                fontWeight: FontWeight.bold, fontSize: 16)),
                       ),
                     ],
                   ),
@@ -183,7 +183,7 @@ class _AddresspageState extends State<Addresspage> {
                                 const InputDecoration(border: InputBorder.none),
                             style: GoogleFonts.mPlus1(
                                 textStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 17)),
+                                    fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ),
@@ -205,7 +205,7 @@ class _AddresspageState extends State<Addresspage> {
                                 const InputDecoration(border: InputBorder.none),
                             style: GoogleFonts.mPlus1(
                                 textStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16)),
+                                    fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ),
@@ -220,7 +220,7 @@ class _AddresspageState extends State<Addresspage> {
                       'Delivery Address',
                       style: GoogleFonts.mPlus1(
                           textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                   ),
                 ),
@@ -238,8 +238,8 @@ class _AddresspageState extends State<Addresspage> {
                         decoration:
                             const InputDecoration(border: InputBorder.none),
                         style: GoogleFonts.mPlus1(
-                            textStyle: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18)),
+                            textStyle:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ),
@@ -252,7 +252,7 @@ class _AddresspageState extends State<Addresspage> {
                       'Contact No',
                       style: GoogleFonts.mPlus1(
                           textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
+                              fontWeight: FontWeight.bold, fontSize: 16)),
                     ),
                   ),
                 ),
@@ -281,7 +281,6 @@ class _AddresspageState extends State<Addresspage> {
                                     ),
                                     child: Text(phone,
                                         style: const TextStyle(
-                                            fontSize: 18,
                                             fontWeight: FontWeight.bold)),
                                   ));
                             }).toList(),
@@ -309,7 +308,7 @@ class _AddresspageState extends State<Addresspage> {
                                 const InputDecoration(border: InputBorder.none),
                             style: GoogleFonts.mPlus1(
                                 textStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18)),
+                                    fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ),

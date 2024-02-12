@@ -16,7 +16,7 @@ class Passwordfield extends StatelessWidget {
         decoration: InputDecoration(
             filled: true,
             fillColor: const Color.fromARGB(255, 243, 241, 241),
-            prefixIcon: const Icon(Icons.fingerprint),
+            prefixIcon: const Icon(Icons.lock_clock_sharp),
             // suffix: IconButton(
             //     onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
             border: OutlineInputBorder(
