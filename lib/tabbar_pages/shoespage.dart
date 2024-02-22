@@ -148,7 +148,7 @@ class _ShoespageState extends State<Shoespage> {
                                   const Icon(Icons.attach_money_outlined,
                                       size: 18),
                                   Text(
-                                    shoesitems[index]["price"],
+                                    shoesitems[index]["price"].toString(),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold),
                                   )

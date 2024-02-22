@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohubproject/screens/selecteditems.dart';
+import 'package:irohubproject/screens/loading.dart';
+
 
 class Electronicspage extends StatefulWidget {
   const Electronicspage({super.key});
@@ -54,7 +55,7 @@ class _ElectronicspageState extends State<Electronicspage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  Selecteditempage(),
+                        builder: (context) =>  Loading(),
                       ));
                 },
                 child: Container(

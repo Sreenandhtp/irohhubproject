@@ -245,12 +245,13 @@ class _AllitemsState extends State<Allitems> {
                             InkWell(
                               onTap: () {
                                 // getData();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Selecteditempage(),
-                                    ));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => Selecteditempage(
+                                //         selelctedAllitems: allitems[index],
+                                //       ),
+                                //     ));
                               },
                               child: Container(
                                 height: 280,
@@ -342,7 +343,7 @@ class _AllitemsState extends State<Allitems> {
                                     const Icon(Icons.attach_money_outlined,
                                         size: 15),
                                     Text(
-                                      allitems[index]["price"],
+                                      allitems[index]["price"].toString(),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     )
@@ -479,7 +480,7 @@ class _AllitemsState extends State<Allitems> {
                                                   Icons.attach_money_outlined,
                                                   size: 15),
                                               Text(
-                                                newarraivals[index]['price'],
+                                                newarraivals[index]['price'].toString(),
                                                 style: const TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold),

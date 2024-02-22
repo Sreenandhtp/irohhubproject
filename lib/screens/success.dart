@@ -51,13 +51,16 @@ class _SuccesspageState extends State<Successpage> {
             : Column(
                 children: [
                   Center(
-                    child: Image.asset('asset/tik.png'),
+                    child: Image.network(
+                        'https://cdn.dribbble.com/users/1751799/screenshots/5512482/check02.gif'),
                   ),
                   Text(
                     'Payment Successful',
                     style: GoogleFonts.mPlus1(
                         textStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    )),
                   ),
                 ],
               ),

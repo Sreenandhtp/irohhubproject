@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohubproject/screens/addresspage.dart';
-
 import 'package:irohubproject/modelclass/userRepository.dart';
 
 class Selecteditempage extends StatefulWidget {
@@ -155,7 +154,7 @@ class _SelecteditempageState extends State<Selecteditempage> {
                                 const Icon(Icons.attach_money_outlined,
                                     size: 22),
                                 Text(
-                                  widget.selelctedAllitems["price"],
+                                  widget.selelctedAllitems["price"].toString(),
                                   style: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold),

@@ -4,6 +4,7 @@ import 'package:irohubproject/screens/homepage.dart';
 import 'package:irohubproject/login_and_signin/loginpage.dart';
 import 'package:irohubproject/variables/sharedpref.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 var finalemail;
 
@@ -58,41 +59,48 @@ class _FlashscreenState extends State<Flashscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 50),
-            child: Text(
-              """Welcome to 
-      IrohShop....""",
-              style: TextStyle(
-                  color: const Color.fromARGB(255, 189, 42, 42),
-                  fontSize: 45,
-                  fontWeight: FontWeight.bold),
-            ),
-          )
-          // Text(
-          //   'From',
-          //   style: TextStyle(fontSize: 10),
-          // ),
-          // SizedBox(height: 5),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     FaIcon(
-          //       FontAwesomeIcons.meta,
-          //       size: 22,
-          //     ),
-          //     SizedBox(width: 6),
-          //     Text(
-          //       'Meta',
-          //       style: TextStyle(fontSize: 15, color: Colors.black),
-          //     )
-          //   ],
-          // )
-        ],
+      body: Center(
+        child: Image.asset(
+          "asset/Screenshot 2024-02-21 012524.png",
+          fit: BoxFit.cover,
+        ),
       ),
+      // body: Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     Padding(
+      //       padding: const EdgeInsets.only(left: 40),
+      //       child: Text(
+      //         """Welcome to
+      // IrohShop....""",
+      //         style: GoogleFonts.mPlus1(
+      //             textStyle: const TextStyle(
+      //                 fontWeight: FontWeight.bold,
+      //                 fontSize: 45,
+      //                 color: Color.fromARGB(255, 185, 48, 38))),
+      //       ),
+      //     )
+      //     // Text(
+      //     //   'From',
+      //     //   style: TextStyle(fontSize: 10),
+      //     // ),
+      //     // SizedBox(height: 5),
+      //     // Row(
+      //     //   mainAxisAlignment: MainAxisAlignment.center,
+      //     //   children: [
+      //     //     FaIcon(
+      //     //       FontAwesomeIcons.meta,
+      //     //       size: 22,
+      //     //     ),
+      //     //     SizedBox(width: 6),
+      //     //     Text(
+      //     //       'Meta',
+      //     //       style: TextStyle(fontSize: 15, color: Colors.black),
+      //     //     )
+      //     //   ],
+      //     // )
+      //   ],
+      // ),
     );
   }
 }

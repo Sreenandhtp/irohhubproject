@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohubproject/screens/loading.dart';
 import 'package:irohubproject/screens/selecteditems.dart';
 
 class Skincarepage extends StatefulWidget {
@@ -42,7 +43,7 @@ class _SkincarepageState extends State<Skincarepage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  Selecteditempage(),
+                        builder: (context) => Loading(),
                       ));
                 },
                 child: Container(

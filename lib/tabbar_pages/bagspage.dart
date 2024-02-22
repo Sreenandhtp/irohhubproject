@@ -131,7 +131,8 @@ class _bagspageState extends State<bagspage> {
                                             controller.saveCartItems(
                                                 bagitems[index]["name"],
                                                 bagitems[index]["image"],
-                                                bagitems[index]["price"],
+                                                bagitems[index]["price"]
+                                                    ,
                                                 context);
                                           },
                                           icon: const Icon(
@@ -148,7 +149,7 @@ class _bagspageState extends State<bagspage> {
                                   const Icon(Icons.attach_money_outlined,
                                       size: 18),
                                   Text(
-                                    bagitems[index]["price"],
+                                    bagitems[index]["price"].toString(),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold),
                                   )

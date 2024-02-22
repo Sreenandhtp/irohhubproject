@@ -14,21 +14,8 @@ class Mycart extends StatefulWidget {
 class _MycartState extends State<Mycart> {
   var size, height, width;
   bool? ischecked = false;
-
-  // List<int> quantities = [1, 1, 1, 1, 1, 1];
-  // List<double> prices = [10.0, 15.0, 20.0, 10.0, 10.0];
-
-  // void incrementQuantity(int index) {
-  //   setState(() {
-  //     quantities[index]++;
-  //   });
-  // }
-
-  // void decrementQuantity(int index) {
-  //   setState(() {
-  //     quantities[index]--;
-  //   });
-  // }
+  int total = 0;
+  double shippingRate = 20.00;
 
   Stream<List<Map<String, dynamic>>> getCartItems() {
     try {
@@ -53,6 +40,7 @@ class _MycartState extends State<Mycart> {
   }
 
   List<String> cartitems = [];
+
   Future<List<String>> getCartitemid() async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -87,15 +75,16 @@ class _MycartState extends State<Mycart> {
     deleteCartitems(cartitemid.toString());
   }
 
-  // double getCartToaL() {
-  //   double total = 0.00;
-  //   setState(() {
-  //     for (var i = 0; i < widget. productName.length; i++) {
-  //       total += quantities[i] * [i];
-  //     }
-  //   });
-  //   return total;
-  // }
+  void totalPrice(List<Map<String, dynamic>> cartitems) {
+    int totalCalPrice = 0;
+    cartitems.forEach((docs) {
+      totalCalPrice += int.parse(docs['price'].toString());
+    });
+    print("JJJJJJJJJJJJJJ$totalCalPrice");
+    total = totalCalPrice;
+    print("bbbbbbbbbbb$total");
+  }
+
   @override
   void initState() {
     super.initState();
@@ -112,7 +101,7 @@ class _MycartState extends State<Mycart> {
         backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -135,298 +124,301 @@ class _MycartState extends State<Mycart> {
               );
             } else if (snapshot.hasData) {
               List<Map<String, dynamic>> items = snapshot.data!;
+              totalPrice(items);
 
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      height: size.height / 2,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: ListView.builder(
-                          itemCount: items.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Dismissible(
-                              key: UniqueKey(),
-                              direction: DismissDirection.endToStart,
-                              onDismissed: (direction) {
-                                cartitemDeleteButton("${cartitems[index]}");
-                              },
-                              background: Container(
-                                height: 100,
-                                width: size.width,
-                                padding: const EdgeInsets.only(right: 15.0),
-                                color: Colors.red,
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  "delete",
-                                  style: GoogleFonts.mPlus1(
-                                      textStyle: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white)),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  InkWell(
-                                    onTap: () => const Selecteditempage(),
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      height: 100,
-                                      width: size.width,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              255, 237, 237, 237),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Container(
-                                              height: 80,
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                  color: const Color.fromARGB(
-                                                      255, 202, 201, 201),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(6),
-                                                child: Image.network(
-                                                  items[index]["image"],
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(14.0),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  items[index]["name"],
-                                                  style: GoogleFonts.mPlus1(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                  )),
-                                                ),
-                                                const SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                        Icons
-                                                            .attach_money_outlined,
-                                                        size: 18),
-                                                    Text(
-                                                      items[index]["price"],
-                                                      style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const Spacer(
-                                            flex: 2,
-                                          ),
-                                          // Row(
-                                          //   children: [
-                                          //     IconButton(
-                                          //         onPressed: () {
-                                          //           decrementQuantity(index);
-                                          //         },
-                                          //         icon: const Icon(Icons.remove)),
-                                          //     Text(quantities[index].toString()),
-                                          //     IconButton(
-                                          //         onPressed: () {
-                                          //           incrementQuantity(index);
-                                          //         },
-                                          //         icon: const Icon(Icons.add)),
-                                          //   ],
-                                          // )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 40,
-                                  )
-                                ],
-                              ),
-                            );
-                          }),
-                    ),
-                    const SizedBox(height: 30),
-                    SingleChildScrollView(
-                      child: Container(
-                        height: size.height / 3,
+              if (items.isNotEmpty) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: size.height / 2,
                         width: double.infinity,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Item cost ',
+                        child: ListView.builder(
+                            itemCount: items.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Dismissible(
+                                key: UniqueKey(),
+                                direction: DismissDirection.endToStart,
+                                onDismissed: (direction) {
+                                  cartitemDeleteButton("${cartitems[index]}");
+                                },
+                                background: Container(
+                                  height: 100,
+                                  width: size.width,
+                                  padding: const EdgeInsets.only(right: 15.0),
+                                  color: Colors.red,
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    "delete",
                                     style: GoogleFonts.mPlus1(
                                         textStyle: const TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 17)),
+                                            color: Colors.white)),
                                   ),
-                                  const Row(
-                                    children: [
-                                      Icon(Icons.attach_money_outlined,
-                                          size: 17),
-                                      Text(
-                                        '450.00',
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Shipping rate',
-                                    style: GoogleFonts.mPlus1(
-                                        textStyle: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 17)),
-                                  ),
-                                  const Row(
-                                    children: [
-                                      Icon(Icons.attach_money_outlined,
-                                          size: 20),
-                                      Text(
-                                        '20.00',
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Divider(),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Total Rate',
-                                    style: GoogleFonts.mPlus1(
-                                        textStyle: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 17)),
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.attach_money_outlined,
-                                          size: 20),
-                                      Text(
-                                        "",
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 60,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Row(
+                                ),
+                                child: Column(
                                   children: [
-                                    Checkbox(
-                                      shape: const CircleBorder(),
-                                      value: ischecked,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          ischecked = value;
-                                        });
-                                      },
+                                    InkWell(
+                                      onTap: () => const Selecteditempage(),
+                                      child: Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        height: 100,
+                                        width: size.width,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                255, 237, 237, 237),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              child: Container(
+                                                height: 80,
+                                                width: 80,
+                                                decoration: BoxDecoration(
+                                                    color: const Color.fromARGB(
+                                                        255, 202, 201, 201),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                  child: Image.network(
+                                                    items[index]["image"],
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(14.0),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    items[index]["name"],
+                                                    style: GoogleFonts.mPlus1(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    )),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                          Icons
+                                                              .attach_money_outlined,
+                                                          size: 18),
+                                                      Text(
+                                                        items[index]["price"]
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const Spacer(
+                                              flex: 2,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
+                                    const SizedBox(
+                                      height: 40,
+                                    )
+                                  ],
+                                ),
+                              );
+                            }),
+                      ),
+                      const SizedBox(height: 30),
+                      SingleChildScrollView(
+                        child: Container(
+                          height: size.height / 3,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
                                     Text(
-                                      'Select Allitems',
+                                      'Item cost ',
                                       style: GoogleFonts.mPlus1(
                                           textStyle: const TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 14)),
+                                              fontSize: 17)),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.attach_money_outlined,
+                                            size: 17),
+                                        Text(
+                                          total.toString(),
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  width: 35,
-                                ),
-                                Container(
-                                  height: 45,
-                                  width: size.width / 2,
-                                  decoration: const BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      color: Colors.redAccent),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.redAccent),
-                                    onPressed: () {},
-                                    child: Text(
-                                      'CheckOut',
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Shipping rate',
                                       style: GoogleFonts.mPlus1(
                                           textStyle: const TextStyle(
-                                              color: Colors.white,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 16)),
+                                              fontSize: 17)),
                                     ),
+                                    const Row(
+                                      children: [
+                                        Icon(Icons.attach_money_outlined,
+                                            size: 20),
+                                        Text(
+                                          '20.00',
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Divider(),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Total Rate',
+                                      style: GoogleFonts.mPlus1(
+                                          textStyle: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17)),
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.attach_money_outlined,
+                                            size: 20),
+                                        Text(
+                                          "${total + shippingRate}",
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        shape: const CircleBorder(),
+                                        value: ischecked,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            ischecked = value;
+                                          });
+                                        },
+                                      ),
+                                      Text(
+                                        'Select Allitems',
+                                        style: GoogleFonts.mPlus1(
+                                            textStyle: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14)),
+                                      ),
+                                    ],
                                   ),
-                                )
-                              ],
-                            )
-                          ],
+                                  const SizedBox(
+                                    width: 35,
+                                  ),
+                                  Container(
+                                    height: 45,
+                                    width: size.width / 2,
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        color: Colors.redAccent),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.redAccent),
+                                      onPressed: () {},
+                                      child: Text(
+                                        'CheckOut',
+                                        style: GoogleFonts.mPlus1(
+                                            textStyle: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16)),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
+                    ],
+                  ),
+                );
+              } else {
+                Container();
+              }
             }
-            return const Text("No Items");
+            return Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.white,
+              child: Center(
+                child: Image.network(
+                    "https://cdn.dribbble.com/users/2382015/screenshots/6065978/no_result.gif"),
+              ),
+            );
           }),
     );
   }
