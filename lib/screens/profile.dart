@@ -1,13 +1,9 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:irohubproject/screens/myprofile.dart';
 import 'package:irohubproject/login_and_signin/loginpage.dart';
-import 'package:irohubproject/variables/sharedpref.dart';
 import 'package:irohubproject/widgets/profilefield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
