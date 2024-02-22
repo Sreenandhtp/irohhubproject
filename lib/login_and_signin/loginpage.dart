@@ -1,10 +1,5 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:irohubproject/screens/home.dart';
 import 'package:irohubproject/authentication/authcontroller.dart';
 import 'package:irohubproject/authentication/googleauth/googlelogin.dart';
 import 'package:irohubproject/screens/forgottpassword.dart';

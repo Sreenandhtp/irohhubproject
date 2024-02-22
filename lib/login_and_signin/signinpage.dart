@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:irohubproject/authentication/authcontroller.dart';
@@ -21,6 +20,8 @@ class _SigninpageState extends State<Signinpage> {
   TextEditingController usenamecontroller = TextEditingController();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+
+  bool passwordObsecured = true;
 
   @override
   void dispose() {
@@ -106,18 +107,25 @@ class _SigninpageState extends State<Signinpage> {
             ),
             SizedBox(
               width: 330,
-              child: TextField(
+              height: 60,
+              child: TextFormField(
                 controller: passwordcontroller,
                 inputFormatters: [LengthLimitingTextInputFormatter(10)],
-                obscureText: true,
-                obscuringCharacter: '•',
+                obscureText: passwordObsecured,
                 style: const TextStyle(fontSize: 16),
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: const Color.fromARGB(255, 243, 241, 241),
-                    prefixIcon: const Icon(Icons.fingerprint),
-                    // suffix: IconButton(
-                    //     onPressed: () {}, icon: Icon(Icons.remove_red_eye)),
+                    prefixIcon: const Icon(Icons.lock),
+                    suffix: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passwordObsecured = !passwordObsecured;
+                          });
+                        },
+                        icon: Icon(passwordObsecured
+                            ? Icons.visibility_off
+                            : Icons.visibility)),
                     border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(width: 5, color: Colors.black),

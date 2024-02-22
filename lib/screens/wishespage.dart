@@ -16,14 +16,7 @@ class Wishespage extends StatefulWidget {
 class _WishespageState extends State<Wishespage> {
   final controller = UserRepository1();
   var size, height, width;
-  // List<String> items = [
-  //   'Selected items',
-  //   'Selected items',
-  //   'Selected items',
-  //   'Selected items',
-  //   'Selected items'
-  // ];
-  Stream<List<Map<String, dynamic>>> getwishesItems() {
+   Stream<List<Map<String, dynamic>>> getwishesItems() {
     try {
       Stream<QuerySnapshot> querySnapshotStream = FirebaseFirestore.instance
           .collection("users")

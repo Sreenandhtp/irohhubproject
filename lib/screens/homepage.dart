@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:irohubproject/screens/cart.dart';
 import 'package:irohubproject/screens/home.dart';
 import 'package:irohubproject/screens/mycart.dart';
-
 import 'package:irohubproject/screens/profile.dart';
 import 'package:irohubproject/screens/wishespage.dart';
 
